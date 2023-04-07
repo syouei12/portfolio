@@ -17,7 +17,7 @@ export default function Login() {
       >
       <TextField
           id="outlined-multiline-static"
-          label="ID"
+          label="メールアドレス"
           fullWidth
           defaultValue=""
           sx={{mx:1 ,
