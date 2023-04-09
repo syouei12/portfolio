@@ -12,7 +12,7 @@ export default function Login() {
     <Container maxWidth="md" sx={{p:10}}>
       <Box
       sx={{
-        width:500,
+        textAlign: "center",
       }}
       >
       <TextField
@@ -23,7 +23,6 @@ export default function Login() {
           sx={{mx:1 ,
             mt:10,
             mb:3,
-            ml:24
           }}
         />
         <TextField
@@ -32,7 +31,6 @@ export default function Login() {
           fullWidth
           defaultValue=""
           sx={{mx:1,
-           ml:24
           }}
         />
         </Box>
@@ -51,9 +49,8 @@ export default function Login() {
       sx={{
         display:'flex',
         justifyContent:'center',
-        width:800,
       }}>
-          <Button variant="contained"  sx={{ml:10}}  href="#outlined-buttons">ログイン</Button>
+          <Button variant="contained"    href="#outlined-buttons">ログイン</Button>
 
       </Box>
       </Container>
