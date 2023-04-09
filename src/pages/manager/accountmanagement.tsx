@@ -9,8 +9,7 @@ import Button from "@mui/material/Button";
 export default function Login() {
   return (
     <>
-      <p style={{ fontSize: "30px", textAlign: "center" }}>管理者</p>
-      <Container maxWidth="md" sx={{ p: 2 }}>
+      <Container maxWidth="md" sx={{ p: 4 }}>
         <Box
           sx={{
             textAlign: "center",
@@ -21,22 +20,36 @@ export default function Login() {
             label="メールアドレス"
             sx={{
               justifyContent: "center",
-              mb: 5,
+              mb: 3,
             }}
           />
-           </Box>
-           <Box
-           sx={{
+        </Box>
+        <Box
+          sx={{
             textAlign: "center",
           }}
-           >
-           <TextField
+        >
+          <TextField
             id="outlined-multiline-static"
-            label="パスワード"
+            label="メールアドレス"
+            sx={{
+              justifyContent: "center",
+              mb: 3,
+            }}
+          />
+        </Box>
+        <Box
+          sx={{
+            textAlign: "center",
+            mb: 3,
+          }}
+        >
+          <TextField
+            id="outlined-multiline-static"
+            label="ユーザー名"
             defaultValue=""
           />
-           </Box>
-        <br />
+        </Box>
         <Box
           component="form"
           noValidate
@@ -48,12 +61,9 @@ export default function Login() {
           {" "}
         </Box>
 
-        <Box
-        sx={{ display: "flex",
-        justifyContent: "center" }}
-        >
-          <Button variant="contained"  href="#outlined-buttons">
-            ログイン
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="contained" href="#outlined-buttons">
+            作成
           </Button>
         </Box>
       </Container>
