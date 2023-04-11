@@ -7,6 +7,11 @@ import Button from "@mui/material/Button";
 
 //sxでcssをあてる
 export default function Login() {
+  const sxTextField = {
+    justifyContent: "center",
+    mb: 3,
+    width: 400,
+  };
   return (
     <>
       <Container maxWidth="md" sx={{ p: 4 }}>
@@ -17,11 +22,9 @@ export default function Login() {
         >
           <TextField
             id="outlined-multiline-static"
+            type="email"
             label="メールアドレス"
-            sx={{
-              justifyContent: "center",
-              mb: 3,
-            }}
+            sx={sxTextField}
           />
         </Box>
         <Box
@@ -32,10 +35,7 @@ export default function Login() {
           <TextField
             id="outlined-multiline-static"
             label="ユーザー名"
-            sx={{
-              justifyContent: "center",
-              mb: 3,
-            }}
+            sx={sxTextField}
           />
         </Box>
         <Box
@@ -47,7 +47,9 @@ export default function Login() {
           <TextField
             id="outlined-multiline-static"
             label="パスワード"
+            type="password"
             defaultValue=""
+            sx={sxTextField}
           />
         </Box>
         <Box
