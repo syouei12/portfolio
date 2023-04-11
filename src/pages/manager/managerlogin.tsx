@@ -22,6 +22,7 @@ export default function Login() {
             sx={{
               justifyContent: "center",
               mb: 5,
+              width:400,
             }}
           />
            </Box>
@@ -34,6 +35,11 @@ export default function Login() {
             id="outlined-multiline-static"
             label="パスワード"
             defaultValue=""
+            sx={{
+              justifyContent: "center",
+              mb: 5,
+              width:400,
+            }}
           />
            </Box>
         <br />

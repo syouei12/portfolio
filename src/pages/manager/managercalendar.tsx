@@ -14,11 +14,10 @@ export default function DisableElevation() {
     sx={{
       display:'flex',
       justifyContent:'center',
-      width:800,
       mt:4,
       mb:8,
     }}>
-    <Button sx={{mx:3}} variant="contained" disableElevation>
+    <Button sx={{mx:3,height:45,}} variant="contained" disableElevation>
       アカウント管理
     </Button>
     <Button  variant="contained" disableElevation>

@@ -64,7 +64,11 @@ export default function Login() {
         </Box>
 
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button variant="contained" href="#outlined-buttons">
+          <Button
+            variant="contained"
+            href="#outlined-buttons"
+            sx={{ width: 90 }}
+          >
             作成
           </Button>
         </Box>
