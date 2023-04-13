@@ -9,7 +9,11 @@ import Button from "@mui/material/Button";
 export default function Login() {
   return (
     <>
-      <p style={{ fontSize: "30px", textAlign: "center" }}>管理者</p>
+       <Box
+          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}
+        >
+          <p >MANAGER</p>
+        </Box>
       <Container maxWidth="md" sx={{ p: 2 }}>
         <Box
           sx={{

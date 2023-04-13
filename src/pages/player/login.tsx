@@ -4,12 +4,18 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import { traceDeprecation } from "process";
 
 //sxでcssをあてる
 export default function Login() {
   return (
     <>
       <Container maxWidth="md" sx={{ p: 10 }}>
+        <Box
+          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}
+        >
+          <p >LOGIN</p>
+        </Box>
         <Box
           sx={{
             textAlign: "center",
