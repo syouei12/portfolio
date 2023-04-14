@@ -8,10 +8,28 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { width } from '@mui/system';
+import { firestore } from '../../utils/firebase';
+import { collection,doc,setDoc, } from 'firebase/firestore';
 
 //sxでcssをあてる
 export default function Report() {
   const [value, setValue] = React.useState<number | null>(0);
+//async
+  const submit =async ()=>{
+    const docRef=doc(collection(firestore,"reports"))//どのfirebaseに保存するかを決めている
+    const reportData={
+      place:"グランド",
+      weather:"雨",
+      goal:"頑張る",
+      condition:5,
+      text:"頑張った",
+      comment:"",
+      userId:"aaa",
+      date:new Date().getTime(),
+      id:docRef.id
+    }
+    await setDoc(docRef,reportData)//await＝結果が出るまで待つ
+  }
 
   return (
     <>
@@ -105,7 +123,7 @@ export default function Report() {
         width:800,
       }}>
       <Button variant="outlined" size="small" sx={{mx:2}}>下書き保存</Button>
-          <Button variant="contained"  sx={{mx:2}}  href="#outlined-buttons">送信</Button>
+          <Button variant="contained"  sx={{mx:2}}  href="#outlined-buttons" onClick={()=>submit()}>送信</Button>
 
       </Box>
       </Container>
