@@ -1,5 +1,5 @@
 //import styles from '@/styles/Report.module.css'
-import * as React from 'react';
+import React,{use, useState} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
@@ -10,29 +10,57 @@ import Stack from '@mui/material/Stack';
 import { width } from '@mui/system';
 import { firestore } from '../../utils/firebase';
 import { collection,doc,setDoc, } from 'firebase/firestore';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { CardActionArea } from '@mui/material';
+import { red } from '@mui/material/colors';
 
 //sxでcssをあてる
 export default function Report() {
-  const [value, setValue] = React.useState<number | null>(0);
+  const [condition, setCondition] = useState<number | null>(0);
+  const [ place,setPlace ] = useState('グランド');
+  const [isPlaceError,setPlaceError] = useState(false);//ここもエラー時
+    const [ weather,setWeather ] = useState('晴れ');
+    const [ goal,setGoal ] = useState('');
+    const [ text,setText ] = useState('');
+
 //async
   const submit =async ()=>{
-    const docRef=doc(collection(firestore,"reports"))//どのfirebaseに保存するかを決めている
+
+    console.log(place);
+      console.log(weather);
+      console.log(goal);
+      console.log(text);
+      console.log(condition);
+
+
+     if(place===''){
+      alert("場所は必須入力です")
+      return
+      // if(place===''){
+      //   alert("場所は必須入力です")
+      //   return
+     }//↑ここをすべて作るエラー時
+
+     const docRef=doc(collection(firestore,"reports"))//どのfirebaseに保存するかを決めている
     const reportData={
-      place:"グランド",
-      weather:"雨",
-      goal:"頑張る",
-      condition:5,
-      text:"頑張った",
-      comment:"",
+       place:place,
+       weather:weather,
+       goal:goal,
+       condition:condition,
+       text:text,
+       comment:"",
       userId:"aaa",
       date:new Date().getTime(),
       id:docRef.id
-    }
+     }
     await setDoc(docRef,reportData)//await＝結果が出るまで待つ
+    alert("送信が完了しました。")
   }
 
+
   return (
-    <>
     <Container maxWidth="md" sx={{p:4}}>
       <Box
       sx={{
@@ -42,18 +70,26 @@ export default function Report() {
       }}
       >
       <TextField
-          id="outlined-multiline-static"
+      id="outlined-multiline-static"
           label="場所"
           fullWidth
-          defaultValue=""
+          type="text"
+          value={place}
+          onChange={(e)=> {
+            setPlaceError(e.target.value==='')//ここもエラー時
+            setPlace(e.target.value)
+          }}
+          error={isPlaceError}
+          helperText={isPlaceError ? "必須入力です。" : ''}//ここもエラー時
           sx={{mx:1}}
-        />
+          />
         <TextField
           id="outlined-multiline-static"
           label="天気"
           fullWidth
-          defaultValue=""
           sx={{mx:1}}
+          value={weather}
+          onChange={(e) => setWeather(e.target.value)}
         />
       </Box>
       <Box
@@ -66,8 +102,11 @@ export default function Report() {
           id="outlined-multiline-static"
           label="今日の目標"
           fullWidth
-          defaultValue=""
           sx={{mx:1}}
+          type="text"
+          value={goal}
+          onChange={(e) => setGoal(e.target.value)}
+
         />
       </Box>
     <Box
@@ -78,10 +117,9 @@ export default function Report() {
       <Typography component="legend">今日の調子</Typography>
       <Rating
         name="simple-controlled"
-        value={value}
+        value={condition}
         onChange={(even, newValue) => {
-          setValue(newValue);
-          <Rating name="no-value" value={null} />
+          setCondition(newValue);
         }}
       />
     </Box>
@@ -101,19 +139,25 @@ export default function Report() {
           multiline
           rows={6}
           fullWidth
-          defaultValue=""
           sx={{mb:3}}
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         />
 
 
-        <TextField
-          id="outlined-multiline-static"
-          label="監督・コーチからメッセージ"
-          multiline
-          rows={4}
-          fullWidth
-          defaultValue=""
-        />
+<Card sx={{ maxWidth: 800, color:"blue" }}>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            監督からのメッセージ
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            監督からコメントがあれば表示されます。
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
       </Box>
 
       <Box
@@ -123,10 +167,9 @@ export default function Report() {
         width:800,
       }}>
       <Button variant="outlined" size="small" sx={{mx:2}}>下書き保存</Button>
-          <Button variant="contained"  sx={{mx:2}}  href="#outlined-buttons" onClick={()=>submit()}>送信</Button>
+          <Button variant="contained"  sx={{mx:2}}  href="#outlined-buttons" onClick={(createPost)=>submit()}>送信</Button>
 
       </Box>
       </Container>
-    </>
   )
 }
