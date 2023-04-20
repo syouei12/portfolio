@@ -21,9 +21,15 @@ export default function Report() {
   const [condition, setCondition] = useState<number | null>(0);
   const [ place,setPlace ] = useState('グランド');
   const [isPlaceError,setPlaceError] = useState(false);//ここもエラー時
-    const [ weather,setWeather ] = useState('晴れ');
-    const [ goal,setGoal ] = useState('');
-    const [ text,setText ] = useState('');
+
+  const [ weather,setWeather ] = useState('晴れ');
+  const [isWeatherError,setWeatherError] = useState(false);//ここもエラー時
+
+  const [ goal,setGoal ] = useState('');
+  const [isGoalError,setGoalError] = useState(false);//ここもエラー時
+
+  const [isTextError,setTextError] = useState(false);//ここもエラー時
+  const [ text,setText ] = useState('');
 
 //async
   const submit =async ()=>{
@@ -83,14 +89,23 @@ export default function Report() {
           helperText={isPlaceError ? "必須入力です。" : ''}//ここもエラー時
           sx={{mx:1}}
           />
+
+
         <TextField
           id="outlined-multiline-static"
           label="天気"
           fullWidth
           sx={{mx:1}}
           value={weather}
-          onChange={(e) => setWeather(e.target.value)}
+          onChange={(e) =>{
+            setWeatherError(e.target.value==='')//ここもエラー時
+            setWeather(e.target.value)}
+          }
+          error={isWeatherError}
+          helperText={isWeatherError ? "必須入力です。" : ''}//ここもエラー時
         />
+
+
       </Box>
       <Box
       sx={{
@@ -105,8 +120,12 @@ export default function Report() {
           sx={{mx:1}}
           type="text"
           value={goal}
-          onChange={(e) => setGoal(e.target.value)}
-
+          onChange={(e) =>{
+            setGoalError(e.target.value==='')//ここもエラー時
+            setGoal(e.target.value)}
+          }
+          error={isGoalError}
+          helperText={isGoalError ? "必須入力です。" : ''}//ここもエラー時
         />
       </Box>
     <Box
@@ -142,7 +161,12 @@ export default function Report() {
           sx={{mb:3}}
           type="text"
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) =>{
+            setTextError(e.target.value==='')//ここもエラー時
+            setText(e.target.value)}
+          }
+          error={isTextError}
+          helperText={isTextError ? "必須入力です。" : ''}//ここもエラー時
         />
 
 
@@ -150,10 +174,10 @@ export default function Report() {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            監督からのメッセージ
+            監督・コーチからのメッセージ
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            監督からコメントがあれば表示されます。
+            監督・コーチからコメントがあれば表示されます。
           </Typography>
         </CardContent>
       </CardActionArea>
