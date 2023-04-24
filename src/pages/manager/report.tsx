@@ -14,8 +14,10 @@ export default function Report() {
   const [value, setValue] = React.useState<number | null>(0);
 
   return (
-    <>
     <Container maxWidth="md" sx={{p:4}}>
+      <Box sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}>
+      <h1>REPORT</h1>
+      </Box>
       <Box
       sx={{
         display:'flex',
@@ -109,6 +111,5 @@ export default function Report() {
 
       </Box>
       </Container>
-    </>
   )
 }

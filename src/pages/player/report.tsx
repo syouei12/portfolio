@@ -31,6 +31,8 @@ export default function Report() {
   const [isTextError,setTextError] = useState(false);//ここもエラー時
   const [ text,setText ] = useState('');
 
+  const [isConditionError,setConditionError] = useState(false);//ここもエラー時
+
 //async
   const submit =async ()=>{
 
@@ -44,10 +46,19 @@ export default function Report() {
      if(place===''){
       alert("場所は必須入力です")
       return
-      // if(place===''){
-      //   alert("場所は必須入力です")
-      //   return
-     }//↑ここをすべて作るエラー時
+     }
+      if(weather===''){
+        alert("天気は必須入力です")
+        return
+      }
+      if(goal===''){
+        alert("目標は必須入力です")
+        return
+      }
+      if(text===''){
+        alert("良かった所・悪かった所。質問は必須入力です")
+        return
+      }
 
      const docRef=doc(collection(firestore,"reports"))//どのfirebaseに保存するかを決めている
     const reportData={
@@ -66,8 +77,14 @@ export default function Report() {
   }
 
 
+
   return (
     <Container maxWidth="md" sx={{p:4}}>
+
+      <Box sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}>
+        <h1>REPORT</h1>
+      </Box>
+
       <Box
       sx={{
         display:'flex',
@@ -75,6 +92,7 @@ export default function Report() {
         mb:2
       }}
       >
+
       <TextField
       id="outlined-multiline-static"
           label="場所"
@@ -138,7 +156,8 @@ export default function Report() {
         name="simple-controlled"
         value={condition}
         onChange={(even, newValue) => {
-          setCondition(newValue);
+          setCondition(newValue)
+          //setConditionError(e.target.value==='')
         }}
       />
     </Box>
@@ -170,7 +189,7 @@ export default function Report() {
         />
 
 
-<Card sx={{ maxWidth: 800, color:"blue" }}>
+<Card sx={{ maxWidth: 800, color:"blue",mb:9, }}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
