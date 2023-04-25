@@ -14,11 +14,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
-import { red } from '@mui/material/colors';
 
 //sxでcssをあてる
 export default function Report() {
-  const [condition, setCondition] = useState<number | null>(0);
   const [ place,setPlace ] = useState('グランド');
   const [isPlaceError,setPlaceError] = useState(false);//ここもエラー時
 
@@ -31,7 +29,8 @@ export default function Report() {
   const [isTextError,setTextError] = useState(false);//ここもエラー時
   const [ text,setText ] = useState('');
 
-  const [isConditionError,setConditionError] = useState(false);//ここもエラー時
+  const [condition, setCondition] = useState(0);
+  const [error, setError] = useState('');
 
 //async
   const submit =async ()=>{
@@ -59,6 +58,10 @@ export default function Report() {
         alert("良かった所・悪かった所。質問は必須入力です")
         return
       }
+      if(condition===0){
+        alert("調子は必須項目です")
+        return
+      }
 
      const docRef=doc(collection(firestore,"reports"))//どのfirebaseに保存するかを決めている
     const reportData={
@@ -68,7 +71,8 @@ export default function Report() {
        condition:condition,
        text:text,
        comment:"",
-      userId:"aaa",
+      playerId:"aaa",
+      managerId:"ggg",
       date:new Date().getTime(),
       id:docRef.id
      }
@@ -160,6 +164,8 @@ export default function Report() {
           //setConditionError(e.target.value==='')
         }}
       />
+
+
     </Box>
     <br/>
     <Box
