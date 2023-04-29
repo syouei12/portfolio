@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import  {firestore} from '@/utils/firebase';//自分が作成した @/=は自分作成した。
 import  {query,collection,where,getDocs,} from 'firebase/firestore';
+import { text } from 'stream/consumers';
 
 type Reports={
 comment:string;
@@ -59,7 +60,7 @@ export default function DisableElevation() {
 
     <Box>
       {reports.map(e=>{
-        return <p>{e.goal}</p>
+        return <p>{e.goal}</p>//次回までのやる所
       })}
     </Box>
 
