@@ -7,6 +7,12 @@ import Box from '@mui/material/Box';
 import  {firestore} from '@/utils/firebase';//自分が作成した @/=は自分作成した。
 import  {query,collection,where,getDocs,} from 'firebase/firestore';
 import { text } from 'stream/consumers';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { CardActionArea } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Link from 'next/link';//
 
 type Reports={
 comment:string;
@@ -43,6 +49,7 @@ export default function DisableElevation() {
       mb:8,
     }}>
 
+
     <Button sx={{mx:3,height:45,}} variant="contained" disableElevation>
       アカウント管理
     </Button>
@@ -60,7 +67,22 @@ export default function DisableElevation() {
 
     <Box>
       {reports.map(e=>{
-        return <p>{e.goal}</p>//次回までのやる所
+        return <div className='reports' key={e.id}>
+          <Link href={'/manager/report?id='+e.id}>
+          <Card sx={{  height:100,maxWidth: 800, margin:2, }}>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom sx={{fontSize:18,}}>
+        {e.playerId}
+          </Typography>
+          <Typography  sx={{fontSize:13,}}>
+          {e.goal}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+    </Link>
+        </div>
       })}
     </Box>
 

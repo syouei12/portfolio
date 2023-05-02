@@ -35,11 +35,11 @@ export default function Report() {
 //async
   const submit =async ()=>{
 
-    console.log(place);
-      console.log(weather);
-      console.log(goal);
-      console.log(text);
-      console.log(condition);
+    // console.log(place);
+    //   console.log(weather);
+    //   console.log(goal);
+    //   console.log(text);
+    //   console.log(condition);
 
 
      if(place===''){
