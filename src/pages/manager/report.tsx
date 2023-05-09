@@ -10,7 +10,8 @@ import Stack from '@mui/material/Stack';
 import { width } from '@mui/system';
 import {useSearchParams} from 'next/navigation';
 import  {firestore} from '@/utils/firebase';//自分が作成した @/=は自分作成した。
-import { doc,getDoc } from 'firebase/firestore';
+import { doc,getDoc,updateDoc } from 'firebase/firestore';
+import { Place } from '@mui/icons-material';
 
 
 
@@ -21,19 +22,61 @@ export default function Report() {
   const searchparams = useSearchParams()
   const id = searchparams.get('id')
   console.log(id);
-  const [report,setReport] = useState({})
+
+  const [report,setReport] = useState({});
   const getReport =async (reportId:string) => {
-    if(!reportId)return
-    const reportRef = doc(firestore,'reports',reportId)
-  const reportSnap = await getDoc(reportRef)
-  const reportData = reportSnap.data()
-  setReport(reportData)
-  }
+    if(!reportId)return;
+    const reportRef = doc(firestore,'reports',reportId);
+  const reportSnap = await getDoc(reportRef);
+  const reportData = reportSnap.data();
+  setReport(reportData);
+  };
+
+
+  const [place, setPlace] = useState('');
+  useEffect(() => {
+      setPlace(report.place);
+  }, [report]);
+
+  const [weather, setWeather] = useState('');
+  useEffect(() => {
+      setWeather(report.weather);
+  }, [report]);
+
+
+  const [goal,setGoal ] = useState('');
+  useEffect(() => {
+      setGoal(report.goal);
+  }, [report]);
+
+  const [condition,setCondition ] = useState(0);
+  useEffect(() => {
+      setCondition(report.condition);
+  }, [report]);
+
+
+  const [text, setText] = useState('');
+  useEffect(() => {
+      setText(report.text);
+  }, [report]);
+
+  const [comment,setComment ] = useState('');
+  useEffect(() => {
+      setComment(report.comment);
+  }, [report]);
+
   useEffect(()=>{
-    getReport(id)
-    console.log(report)
-  },[id]
-  )
+    getReport(id);
+  },[id]);
+
+
+  const updateComment=async ()=>{
+    const reportRef = doc(firestore,'reports',id);
+    await updateDoc(reportRef,{comment:comment})//後ろのコメントはユーザーが入力したコメント
+    alert('送信しました')
+    location.reload()
+  }
+
 
   return (
     <Container maxWidth="md" sx={{p:4}}>
@@ -51,15 +94,17 @@ export default function Report() {
           id="outlined-multiline-static"
           label="場所"//ここをいじる
           fullWidth
-          defaultValue=""
+          value={place}
           sx={{mx:1}}
+          aria-readonly
         />
         <TextField
           id="outlined-multiline-static"
           label="天気"
           fullWidth
-          defaultValue=""
+          value={weather}
           sx={{mx:1}}
+          aria-readonly
         />
       </Box>
       <Box
@@ -72,8 +117,9 @@ export default function Report() {
           id="outlined-multiline-static"
           label="今日の目標"
           fullWidth
-          defaultValue=""
+          value={goal}
           sx={{mx:1}}
+          aria-readonly
         />
       </Box>
     <Box
@@ -84,11 +130,12 @@ export default function Report() {
       <Typography component="legend">今日の調子</Typography>
       <Rating
         name="simple-controlled"
-        value={value}
+        value={condition}
         onChange={(even, newValue) => {
           setValue(newValue);
-          <Rating name="no-value" value={null} />
+          <Rating name="no-value" value={condition} />
         }}
+        readOnly
       />
     </Box>
     <br/>
@@ -107,8 +154,9 @@ export default function Report() {
           multiline
           rows={6}
           fullWidth
-          defaultValue=""
+          value={text}
           sx={{mb:3}}
+          aria-readonly
         />
 
 
@@ -118,7 +166,10 @@ export default function Report() {
           multiline
           rows={4}
           fullWidth
-          defaultValue=""
+          value={comment}
+          onChange={(e)=> {
+            setComment(e.target.value)
+          }}
         />
       </Box>
 
@@ -128,8 +179,12 @@ export default function Report() {
         justifyContent:'center',
         width:800,
       }}>
-      <Button variant="outlined" size="small" sx={{mx:2}}>下書き保存</Button>
-          <Button variant="contained"  sx={{mx:2}}  href="#outlined-buttons">送信</Button>
+          <Button variant="contained"
+           sx={{mx:3}}
+            href="#outlined-buttons"
+           onClick={updateComment}>
+            送信
+          </Button>
 
       </Box>
       </Container>

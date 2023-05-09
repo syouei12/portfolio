@@ -13,6 +13,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';//
+import { alignProperty } from '@mui/material/styles/cssUtils';
 
 type Reports={
 comment:string;
@@ -47,11 +48,14 @@ export default function DisableElevation() {
       justifyContent:'center',
       mt:4,
       mb:8,
+      textDecoration:'none'
     }}>
 
 
     <Button sx={{mx:3,height:45,}} variant="contained" disableElevation>
-      アカウント管理
+    <Link href={'/manager/createaccount'} sx={{}}>
+      <p style={{color:'white',}}>アカウント管理</p>
+      </Link>
     </Button>
 
     <Button  variant="contained" disableElevation>
@@ -65,12 +69,18 @@ export default function DisableElevation() {
     </LocalizationProvider>
     </Box>
 
-    <Box>
+    <Box
+    sx={{
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center',
+      listStyle:'none',
+    }}>
       {reports.map(e=>{
         return <div className='reports' key={e.id}>
           <Link href={'/manager/report?id='+e.id}>
-          <Card sx={{  height:100,maxWidth: 800, margin:2, }}>
-      <CardActionArea>
+          <Card sx={{ margin:2, }}>
+      <CardActionArea  sx={{width:350,}}>
         <CardContent>
           <Typography gutterBottom sx={{fontSize:18,}}>
         {e.playerId}
