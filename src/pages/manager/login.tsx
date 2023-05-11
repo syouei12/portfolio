@@ -1,28 +1,52 @@
 //import styles from '@/styles/Report.module.css'
-import * as React from "react";
+import  React, {useState} from 'react';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import {signInWithEmailAndPassword} from 'firebase/auth'
+import {useRouter} from 'next/router'
+import {auth} from '@/utils/firebase'
+
+
 
 //sxでcssをあてる
 export default function Login() {
+  const router=useRouter()
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+  const login =async () => {
+    //if//メールアドレスが空白の場合
+    //if//パスワードの空白の場合
+    await signInWithEmailAndPassword (auth,email,password)
+    .then(async()=>{//うまく行った場合
+      alert('ログインしました')
+      await router.push('/manager/calendar')//登録後カレンダーにとぶ
+    })
+    .catch((error)=>{//失敗した場合
+    alert('ログインできませんでした\nメールアドレスとパスワードを確認してください')
+    })
+  }
   return (
     <>
-       <Box
-          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}
-        >
-          <p >MANAGER</p>
-        </Box>
-      <Container maxWidth="md" sx={{ p: 2 }}>
+      <Container maxWidth="md" sx={{ p: 2,}}>
         <Box
           sx={{
             textAlign: "center",
           }}
         >
+          <Box
+          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}
+        >
+          <p >MANAGER</p>
+        </Box>
           <TextField
             id="outlined-multiline-static"
             label="メールアドレス"
+            value={email}
+            onChange={(e)=>{
+              setEmail(e.target.value)
+            }}
             sx={{
               justifyContent: "center",
               mb: 5,
@@ -38,7 +62,10 @@ export default function Login() {
            <TextField
             id="outlined-multiline-static"
             label="パスワード"
-            defaultValue=""
+            value={password}
+            onChange={(e)=>{
+              setPassword(e.target.value)//
+            }}
             sx={{
               justifyContent: "center",
               mb: 5,
@@ -62,7 +89,7 @@ export default function Login() {
         sx={{ display: "flex",
         justifyContent: "center" }}
         >
-          <Button variant="contained"  href="#outlined-buttons">
+          <Button variant="contained"  href="#outlined-buttons" onClick={login}>
             ログイン
           </Button>
         </Box>

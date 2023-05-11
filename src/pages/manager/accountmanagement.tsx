@@ -4,6 +4,13 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { CardActionArea } from '@mui/material';
+import Typography from '@mui/material/Typography';
+
+
 //sxでcssをあてる
 export default function Login() {
   const sxTextField = {
@@ -11,6 +18,7 @@ export default function Login() {
     mb: 3,
     width: 400,
   };
+  //ifメールアドレス・パスワードが空白の場合
   return (
     <>
       <Container maxWidth="md" sx={{ p: 4 }}>
@@ -32,7 +40,7 @@ export default function Login() {
             sx={sxTextField}
           />
         </Box>
-        <Box
+        {/* <Box
           sx={{
             textAlign: "center",
           }}
@@ -42,7 +50,7 @@ export default function Login() {
             label="ユーザー名"
             sx={sxTextField}
           />
-        </Box>
+        </Box> */}
         <Box
           sx={{
             textAlign: "center",
@@ -77,6 +85,31 @@ export default function Login() {
             作成
           </Button>
         </Box>
+        <Box
+          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ",mt:9, mb: 4,fontSize:30, }}
+        >
+          <p>PLAYER一覧</p>
+        </Box>
+        <Box
+    sx={{
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center',
+      listStyle:'none',
+    }}>
+          <Card sx={{ margin:2, }}>
+      <CardActionArea  sx={{width:350,}}>
+        <CardContent>
+          <Typography gutterBottom sx={{fontSize:18,}}>
+            kkkk
+          </Typography>
+          <Typography  sx={{fontSize:13,}}>
+            kkk
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+    </Box>
       </Container>
     </>
   );

@@ -1,12 +1,25 @@
 //import styles from '@/styles/Report.module.css'
-import * as React from "react";
+import  React, {useState} from 'react';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import {auth} from '@/utils/firebase'
+import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {useRouter} from 'next/router'
+
 
 //sxでcssをあてる
 export default function Login() {
+  const router=useRouter()
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+  const createAccount =async () => {
+    await createUserWithEmailAndPassword(auth,email,password)
+    alert('アカウントを作成しました。')
+    await router.push('/manager/calendar')//登録後カレンダーにとぶ
+  }
+
   return (
     <>
       <Container maxWidth="md" sx={{ p: 7 }}>
@@ -20,7 +33,11 @@ export default function Login() {
         >
           <TextField
             id="outlined-multiline-static"
-            label="ユーザー名"
+            label="メールアドレス"
+            value={email}
+            onChange={(e)=>{
+              setEmail(e.target.value)
+            }}
             sx={{
                 mr:4,
               }}
@@ -28,6 +45,10 @@ export default function Login() {
           <TextField
             id="outlined-multiline-static"
             label="パスワード"
+            value={password}
+            onChange={(e)=>{
+              setPassword(e.target.value)//
+            }}
             sx={{
                 mr:4,
               }}
@@ -49,7 +70,7 @@ export default function Login() {
         </Box>
 
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button variant="contained" href="#outlined-buttons">
+          <Button variant="contained" href="#outlined-buttons" onClick={createAccount}>
             アカウント作成
           </Button>
         </Box>
