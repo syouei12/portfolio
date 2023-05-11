@@ -35,7 +35,7 @@ export default function Report() {
 
   const [place, setPlace] = useState('');
   useEffect(() => {
-      setPlace(report.place);
+      setPlace(report.place);//選手が記入したデータを取得
   }, [report]);
 
   const [weather, setWeather] = useState('');
@@ -72,7 +72,7 @@ export default function Report() {
 
   const updateComment=async ()=>{
     const reportRef = doc(firestore,'reports',id);
-    await updateDoc(reportRef,{comment:comment})//後ろのコメントはユーザーが入力したコメント
+    await updateDoc(reportRef,{comment:comment})//前は名前で後ろのコメントはユーザーが入力したコメント
     alert('送信しました')
     location.reload()
   }
@@ -92,11 +92,11 @@ export default function Report() {
       >
       <TextField
           id="outlined-multiline-static"
-          label="場所"//ここをいじる
+          label="場所"
           fullWidth
           value={place}
           sx={{mx:1}}
-          aria-readonly
+          aria-readonly//記入できない設定
         />
         <TextField
           id="outlined-multiline-static"
@@ -135,7 +135,7 @@ export default function Report() {
           setValue(newValue);
           <Rating name="no-value" value={condition} />
         }}
-        readOnly
+        readOnly//記入できない設定
       />
     </Box>
     <br/>

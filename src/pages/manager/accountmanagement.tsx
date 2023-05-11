@@ -1,5 +1,5 @@
 //import styles from '@/styles/Report.module.css'
-import * as React from "react";
+import  React, {useState} from 'react';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
@@ -9,15 +9,28 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import {auth} from '@/utils/firebase'
+import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {useRouter} from 'next/router'
 
 
 //sxでcssをあてる
 export default function Login() {
+  const router=useRouter()
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+  const createAccount =async () => {
+   await createUserWithEmailAndPassword(auth,email,password)
+    alert('アカウントを作成しました。')
+    await router.push('/manager/calendar')//登録後カレンダーにとぶ
+  }
   const sxTextField = {
     justifyContent: "center",
     mb: 3,
     width: 400,
   };
+
+
   //ifメールアドレス・パスワードが空白の場合
   return (
     <>
@@ -37,6 +50,10 @@ export default function Login() {
             id="outlined-multiline-static"
             type="email"
             label="メールアドレス"
+            value={email}
+            onChange={(e)=>{
+              setEmail(e.target.value)
+            }}
             sx={sxTextField}
           />
         </Box>
@@ -61,7 +78,10 @@ export default function Login() {
             id="outlined-multiline-static"
             label="パスワード"
             type="password"
-            defaultValue=""
+            value={password}
+            onChange={(e)=>{
+              setPassword(e.target.value)//
+            }}
             sx={sxTextField}
           />
         </Box>
@@ -81,6 +101,7 @@ export default function Login() {
             variant="contained"
             href="#outlined-buttons"
             sx={{ width: 90 }}
+            onClick={createAccount}
           >
             作成
           </Button>
