@@ -15,10 +15,11 @@ export default function Login() {
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
   const createAccount =async () => {
-    await createUserWithEmailAndPassword(auth,email,password)
+   await createUserWithEmailAndPassword(auth,email,password)
     alert('アカウントを作成しました。')
     await router.push('/manager/calendar')//登録後カレンダーにとぶ
   }
+
 
   return (
     <>

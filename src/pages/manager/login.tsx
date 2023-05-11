@@ -16,15 +16,18 @@ export default function Login() {
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
   const login =async () => {
-    //if//メールアドレスが空白の場合
-    //if//パスワードの空白の場合
+    if(email===''){//メールアドレスが空白の場合
+    alert('メールアドレスを入力してください')
+    }if(password===''){
+      alert('パスワードを入力してください')
+    }//パスワードの空白の場合
     await signInWithEmailAndPassword (auth,email,password)
     .then(async()=>{//うまく行った場合
-      alert('ログインしました')
+      alert('ログインに成功しました')
       await router.push('/manager/calendar')//登録後カレンダーにとぶ
     })
     .catch((error)=>{//失敗した場合
-    alert('ログインできませんでした\nメールアドレスとパスワードを確認してください')
+    alert('ログイン失敗しました\nメールアドレスとパスワードを確認してください')
     })
   }
   return (

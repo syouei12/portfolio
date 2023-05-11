@@ -24,20 +24,20 @@ export default function Login() {
             }}
           />
         </Box>
-        <Box
+        {/* <Box
           sx={{
             textAlign: "center",
           }}
-        >
-          <TextField
+        > */}
+          {/* <TextField
             id="outlined-multiline-static"
-            label="メールアドレス"
+            label="ユーザー名"
             sx={{
               justifyContent: "center",
               mb: 3,
-            }}
-          />
-        </Box>
+            }} */}
+          {/* />
+        </Box> */}
         <Box
           sx={{
             textAlign: "center",
