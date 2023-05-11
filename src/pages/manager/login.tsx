@@ -63,6 +63,7 @@ export default function Login() {
           }}
            >
            <TextField
+            type="password"
             id="outlined-multiline-static"
             label="パスワード"
             value={password}

@@ -11,18 +11,18 @@ import { CardActionArea } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import {auth} from '@/utils/firebase'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
-import {useRouter} from 'next/router'
+// import {useRouter} from 'next/router'
 
 
 //sxでcssをあてる
 export default function Login() {
-  const router=useRouter()
+  // const router=useRouter()
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
   const createAccount =async () => {
    await createUserWithEmailAndPassword(auth,email,password)
     alert('アカウントを作成しました。')
-    await router.push('/manager/calendar')//登録後カレンダーにとぶ
+    // await router.push('/manager/calendar')//登録後カレンダーにとぶ
   }
   const sxTextField = {
     justifyContent: "center",
@@ -77,7 +77,7 @@ export default function Login() {
           <TextField
             id="outlined-multiline-static"
             label="パスワード"
-            type="password"
+            // type="password"
             value={password}
             onChange={(e)=>{
               setPassword(e.target.value)//
