@@ -11,19 +11,29 @@ import { CardActionArea } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import {auth} from '@/utils/firebase'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
-// import {useRouter} from 'next/router'
+import {useRouter} from 'next/router'
 
 
 //sxでcssをあてる
 export default function Login() {
-  // const router=useRouter()
+  const router=useRouter()
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
   const createAccount =async () => {
+    if(email===''){//メールアドレスが空白の場合
+      alert('メールアドレスを入力してください')
+      }if(password===''){
+        alert('パスワードを入力してください')
+      }//パスワードの空白の場合
    await createUserWithEmailAndPassword(auth,email,password)
-    alert('アカウントを作成しました。')
-    // await router.push('/manager/calendar')//登録後カレンダーにとぶ
-  }
+   .then(async()=>{//うまく行った場合
+    alert('アカウントを作成しました')
+    await router.push('/manager/calendar')//登録後カレンダーにとぶ
+  })
+  .catch((error)=>{//失敗した場合
+  alert('アカウント作成に失敗しました')
+  })}
+
   const sxTextField = {
     justifyContent: "center",
     mb: 3,
