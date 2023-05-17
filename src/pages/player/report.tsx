@@ -1,5 +1,5 @@
 //import styles from '@/styles/Report.module.css'
-import React,{use, useState} from 'react';
+import React,{use, useState,useEffect} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
@@ -8,8 +8,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { width } from '@mui/system';
-import { firestore } from '../../utils/firebase';
+import { firestore, } from '../../utils/firebase';
 import { collection,doc,setDoc, } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -17,6 +18,7 @@ import { CardActionArea } from '@mui/material';
 
 //sxでcssをあてる
 export default function Report() {
+  const auth=getAuth();
   const [ place,setPlace ] = useState('グランド');
   const [isPlaceError,setPlaceError] = useState(false);//ここもエラー時
 
@@ -32,6 +34,18 @@ export default function Report() {
   const [condition, setCondition] = useState(0);
   const [error, setError] = useState('');
 
+  const [uid, setUid] = useState('');
+  const getUid = async()=>{
+    const user = auth.currentUser//ログインしないとコンソールでnull
+    console.log(user);
+    if(user){
+      setUid(user?.uid)
+    }
+  }
+  useEffect(()=>{
+    getUid()
+    console.log(uid)
+  },[auth]) //[]に何もないときは一回動く←ページが読み込まれたとき、変わるたびに起動もする
 //async
   const submit =async ()=>{
 
@@ -71,7 +85,7 @@ export default function Report() {
        condition:condition,
        text:text,
        comment:"",
-      playerId:"aaa",
+      playerId:uid,
       managerId:"ggg",
       date:new Date().getTime(),
       id:docRef.id

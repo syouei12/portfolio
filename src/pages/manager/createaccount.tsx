@@ -4,9 +4,10 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import {auth} from '@/utils/firebase'
+import {auth,firestore} from '@/utils/firebase'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {useRouter} from 'next/router'
+import { collection,doc,setDoc, } from 'firebase/firestore';
 
 
 //sxでcssをあてる
