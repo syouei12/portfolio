@@ -15,6 +15,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
+import {useRouter} from 'next/router'
 
 //sxでcssをあてる
 export default function Report() {
@@ -33,6 +34,7 @@ export default function Report() {
 
   const [condition, setCondition] = useState(0);
   const [error, setError] = useState('');
+  const router=useRouter()
 
   const [uid, setUid] = useState('');
   const getUid = async()=>{
@@ -92,6 +94,7 @@ export default function Report() {
      }
     await setDoc(docRef,reportData)//await＝結果が出るまで待つ
     alert("送信が完了しました。")
+
   }
 
 
@@ -230,7 +233,12 @@ export default function Report() {
         width:800,
       }}>
       <Button variant="outlined" size="small" sx={{mx:2}}>下書き保存</Button>
-          <Button variant="contained"  sx={{mx:2}}  href="#outlined-buttons" onClick={(createPost)=>submit()}>送信</Button>
+          <Button variant="contained"  sx={{mx:2}} 
+           href="#outlined-buttons"
+            onClick={(createPost)=>submit()
+            }>
+            送信
+            </Button>
 
       </Box>
       </Container>

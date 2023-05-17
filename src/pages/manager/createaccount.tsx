@@ -1,5 +1,5 @@
 //import styles from '@/styles/Report.module.css'
-import  React, {useState} from 'react';
+import  React, {use,useState} from 'react';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
@@ -15,6 +15,7 @@ export default function Login() {
   const router=useRouter()
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
+  const [name,setName]=useState('')
   const createAccount =async () => {
     if(email===''){//メールアドレスが空白の場合
       alert('メールアドレスを入力してください')
@@ -22,7 +23,19 @@ export default function Login() {
         alert('パスワードを入力してください')
       }//パスワードの空白の場合
    await createUserWithEmailAndPassword(auth,email,password)
-   .then(async()=>{//うまく行った場合
+   .then(async(userCredential)=>{//うまく行った場合
+    const user = userCredential.user
+    console.log(user)
+
+    const uid=user.uid
+
+    const docRef=doc(collection(firestore,"managers"),uid)//どのfirebaseに保存するかを決めている
+    const playerData={
+      email:email,
+      name:name,
+      id:uid
+     }//クリエイトアカウントに反映させる
+    await setDoc(docRef,playerData)
     alert('アカウントを作成しました')
     await router.push('/manager/calendar')//登録後カレンダーにとぶ
   })
@@ -42,6 +55,7 @@ export default function Login() {
 
           }}
         >
+          <Box>
           <TextField
             id="outlined-multiline-static"
             label="メールアドレス"
@@ -50,9 +64,29 @@ export default function Login() {
               setEmail(e.target.value)
             }}
             sx={{
-                mr:4,
+                mr:2,
               }}
           />
+          </Box>
+          <Box
+          sx={{
+            textAlign: "center",
+            mr:2,
+          }}
+        >
+          <TextField
+            id="outlined-multiline-static"
+            label="名前"
+            value={name}
+            onChange={(e)=>{
+              setName(e.target.value)
+            }}
+            sx={{
+              justifyContent: "center",
+              mb: 3,
+            }}
+          />
+        </Box>
           <TextField
             id="outlined-multiline-static"
             label="パスワード"
@@ -64,13 +98,13 @@ export default function Login() {
                 mr:4,
               }}
           />
-          <Button variant="contained" href="#outlined-buttons"
+          {/* <Button variant="contained" href="#outlined-buttons"
           sx={{
             p:2,
           }}
           >
             削除
-          </Button>
+          </Button> */}
         </Box>
         <Box
           component="form"
