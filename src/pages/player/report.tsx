@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { width } from '@mui/system';
 import { firestore, } from '../../utils/firebase';
-import { collection,doc,setDoc, } from 'firebase/firestore';
+import { collection,doc,setDoc,getDoc, } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -19,6 +19,7 @@ import {useRouter} from 'next/router'
 
 //sxでcssをあてる
 export default function Report() {
+
   const auth=getAuth();
   const [ place,setPlace ] = useState('グランド');
   const [isPlaceError,setPlaceError] = useState(false);//ここもエラー時
@@ -44,6 +45,7 @@ export default function Report() {
       setUid(user?.uid)
     }
   }
+
   useEffect(()=>{
     getUid()
     console.log(uid)
@@ -78,9 +80,13 @@ export default function Report() {
         alert("調子は必須項目です")
         return
       }
+     const docRef=doc(collection(firestore,"players"),uid)//どのfirebaseに保存するかを決めている
+     const playerSnap = await getDoc(docRef);
+     const playerData = playerSnap.data();//Playerのfirestoreのデータ
+     const reportDocRef =doc(collection(firestore,"reports"))
 
-     const docRef=doc(collection(firestore,"reports"))//どのfirebaseに保存するかを決めている
     const reportData={
+      name:playerData.name,
        place:place,
        weather:weather,
        goal:goal,
@@ -88,11 +94,11 @@ export default function Report() {
        text:text,
        comment:"",
       playerId:uid,
-      managerId:"ggg",
+      managerId:playerData.managerId,
       date:new Date().getTime(),
-      id:docRef.id
+      id:reportDocRef.id
      }
-    await setDoc(docRef,reportData)//await＝結果が出るまで待つ
+    await setDoc(reportDocRef,reportData)//await＝結果が出るまで待つ
     alert("送信が完了しました。")
 
   }

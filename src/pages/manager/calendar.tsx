@@ -14,6 +14,8 @@ import { CardActionArea } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';//
 import { alignProperty } from '@mui/material/styles/cssUtils';
+import {getAuth} from 'firebase/auth'
+
 
 type Reports={
 comment:string;
@@ -29,9 +31,23 @@ weather:string;
 }
 
 export default function DisableElevation() {
+  const auth=getAuth();
+  const [uid, setUid] = useState('');
+  const getUid = async()=>{
+    const user = auth.currentUser//ログインしないとコンソールでnull
+    console.log(user);
+    if(user){
+      setUid(user?.uid)
+    }
+  }//自分のチームのmanagerIDの部分のレポートだけ抜き取る
+
+  useEffect(()=>{
+    getUid()
+    console.log(uid)
+  },[auth])
   const [reports,setReports]= useState<Reports[]>([])
   const getReports = async () => {
-    const reportsQuery=query(collection(firestore,'reports'),where('managerId','==','ggg'))
+    const reportsQuery=query(collection(firestore,'reports'),where('managerId','==',uid))
     const reportsSnap=await getDocs(reportsQuery)
     const reportsData:any=reportsSnap.docs.map(d=>d.data())
     console.log(reportsData)
@@ -65,6 +81,7 @@ export default function DisableElevation() {
 
     <Box>
     <LocalizationProvider  dateAdapter={AdapterDayjs}>
+      {/* ここ宿題 */}
       <DateCalendar />
     </LocalizationProvider>
     </Box>
@@ -83,10 +100,11 @@ export default function DisableElevation() {
       <CardActionArea  sx={{width:350,}}>
         <CardContent>
           <Typography gutterBottom sx={{fontSize:18,}}>
-        {e.playerId}
+        {e.name}
           </Typography>
           <Typography  sx={{fontSize:13,}}>
           {e.goal}
+          {/* 選手のレポート部分の目標を持ってきている */}
           </Typography>
         </CardContent>
       </CardActionArea>

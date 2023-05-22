@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import {getFirestore}from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-
+import { getFunctions } from "firebase/functions"
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -23,4 +23,6 @@ const app = initializeApp(firebaseConfig);
 
 const firestore = getFirestore(app);
 const auth = getAuth(app)//自分のfirebaseであることを示している
-export {firestore,auth}
+
+const functions = getFunctions(app);
+export {firestore,auth,functions};

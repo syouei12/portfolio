@@ -23,7 +23,7 @@ export default function Login() {
     await signInWithEmailAndPassword (auth,email,password)
     .then(async()=>{//うまく行った場合
       alert('ログインに成功しました')
-      await router.push('/player/calendar')//登録後カレンダーにとぶ
+      await router.push('/player/report')//登録後カレンダーにとぶ
     })
     .catch((error)=>{//失敗した場合
     alert('ログイン失敗しました\nメールアドレスとパスワードを確認してください')
