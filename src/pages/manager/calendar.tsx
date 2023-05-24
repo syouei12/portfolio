@@ -15,9 +15,10 @@ import Typography from '@mui/material/Typography';
 import Link from 'next/link';//
 import { alignProperty } from '@mui/material/styles/cssUtils';
 import {getAuth} from 'firebase/auth'
-
+import dayjs, { Dayjs } from 'dayjs';
 
 type Reports={
+name:string;
 comment:string;
 condition:number;
 date:number;
@@ -31,6 +32,10 @@ weather:string;
 }
 
 export default function DisableElevation() {
+  const today = new Date()//Calendarの日付部分の今を表す設定
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs(today));
+
+   console.log(value);
   const auth=getAuth();
   const [uid, setUid] = useState('');
   const getUid = async()=>{
@@ -46,16 +51,41 @@ export default function DisableElevation() {
     console.log(uid)
   },[auth])
   const [reports,setReports]= useState<Reports[]>([])
+  const [filteredReports,setFilteredReports]= useState<Reports[]>([])
   const getReports = async () => {
     const reportsQuery=query(collection(firestore,'reports'),where('managerId','==',uid))
     const reportsSnap=await getDocs(reportsQuery)
     const reportsData:any=reportsSnap.docs.map(d=>d.data())
     console.log(reportsData)
     setReports(reportsData)
+
+    const filteredReportData=reportsData.filter(e=>{
+      const unixTime = e.date
+      const date = dayjs(unixTime).format('YYYY-MM-DD')//
+      const isSelectedDate = (date===value?.format('YYYY-MM-DD'));
+      return isSelectedDate
+    })
+    setFilteredReports(filteredReportData);
   }
   useEffect(()=>{
     getReports()
-  },[])
+  },[uid])//中のuidを取ってから動く
+
+
+
+  const changeReports = async () => {
+    const filteredReportData=reports.filter(e=>{
+      const unixTime = e.date
+      const date = dayjs(unixTime).format('YYYY-MM-DD')//
+      const isSelectedDate = (date===value?.format('YYYY-MM-DD'));
+      return isSelectedDate
+    })
+    setFilteredReports(filteredReportData);
+  }
+  useEffect(()=>{
+    changeReports()
+  },[value])
+
   return(
     <>
     <Box
@@ -80,11 +110,12 @@ export default function DisableElevation() {
     </Box>
 
     <Box>
+    {/*カレンダー部分↓ */}
     <LocalizationProvider  dateAdapter={AdapterDayjs}>
-      {/* ここ宿題 */}
-      <DateCalendar />
+      <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
     </LocalizationProvider>
     </Box>
+
 
     <Box
     sx={{
@@ -93,7 +124,7 @@ export default function DisableElevation() {
       alignItems:'center',
       listStyle:'none',
     }}>
-      {reports.map(e=>{
+      {filteredReports.map(e=>{
         return <div className='reports' key={e.id}>
           <Link href={'/manager/report?id='+e.id}>
           <Card sx={{ margin:2, }}>
@@ -102,7 +133,8 @@ export default function DisableElevation() {
           <Typography gutterBottom sx={{fontSize:18,}}>
         {e.name}
           </Typography>
-          <Typography  sx={{fontSize:13,}}>
+
+          <Typography  sx={{fontSize:14,}}>
           {e.goal}
           {/* 選手のレポート部分の目標を持ってきている */}
           </Typography>
