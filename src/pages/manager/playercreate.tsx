@@ -1,3 +1,4 @@
+// @ts-nocheck
 //import styles from '@/styles/Report.module.css'
 import  React, {use, useState,useEffect} from 'react';
 import Box from "@mui/material/Box";
@@ -9,6 +10,7 @@ import {getAuth} from 'firebase/auth'
 import {useRouter} from 'next/router'
 import { collection,doc,setDoc, } from 'firebase/firestore';
 import { httpsCallable } from 'firebase/functions';//サーバー側の関数を呼ぶ
+import Link from 'next/link';//
 
 
 //sxでcssをあてる
@@ -52,6 +54,8 @@ export default function PlayerCreate() {
       password:password,
       managerId:uid,
     })
+    alert('アカウントを作成しました')
+    await router.push('/manager/calendar')
   //  await createUserWithEmailAndPassword(auth,email,password)
   //  .then(async(userCredential)=>{//うまく行った場合
   //   const user = userCredential.user
@@ -66,8 +70,7 @@ export default function PlayerCreate() {
   //     id:uid
      }//クリエイトアカウントに反映させる
     //await setDoc(docRef,playerData)//await＝結果が出るまで待つ
-  //   alert('アカウントを作成しました')
-  //   await router.push('/manager/calendar')//登録後カレンダーにとぶ
+    //登録後カレンダーにとぶ
   // })
   // .catch((error)=>{//失敗した場合
   // alert('アカウント作成に失敗しました')
@@ -81,6 +84,11 @@ export default function PlayerCreate() {
             textAlign: "center",
           }}
         >
+           <Box
+          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}
+        >
+          <p >PLAYERCREATE</p>
+        </Box>
           <TextField
             id="outlined-multiline-static"
             label="メールアドレス"
@@ -140,7 +148,7 @@ export default function PlayerCreate() {
 
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Button variant="contained" href="#outlined-buttons" onClick={createAccount}>
-            作成
+            <p>作成</p>
           </Button>
         </Box>
 

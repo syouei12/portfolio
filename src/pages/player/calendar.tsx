@@ -1,3 +1,4 @@
+// @ts-nocheck
 import  React, {useState,useEffect} from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -15,6 +16,8 @@ import Link from 'next/link';//
 import { alignProperty } from '@mui/material/styles/cssUtils';
 import {getAuth} from 'firebase/auth'
 import dayjs, { Dayjs } from 'dayjs';
+import Button from '@mui/material/Button';
+
 
 type Reports={
 name:string;
@@ -55,7 +58,7 @@ export default function BasicDateCalendar() {
   const [reports,setReports]= useState<Reports[]>([])
   const [filteredReports,setFilteredReports]= useState<Reports[]>([])
   const getReports = async () => {
-    const reportsQuery=query(collection(firestore,'reports'),where('managerId','==',uid))
+    const reportsQuery=query(collection(firestore,'reports'),where('playerId','==',uid))
     const reportsSnap=await getDocs(reportsQuery)
     const reportsData:any=reportsSnap.docs.map(d=>d.data())
     console.log(reportsData)
@@ -90,16 +93,31 @@ export default function BasicDateCalendar() {
 
   return (
     <>
+   <Box
+    sx={{
+      display:'flex',
+      justifyContent:'center',
+      mt:4,
+      mb:8,
+      textDecoration:'none'
+    }}>
+      <Link href={'/player/report'} >
+      <Button variant="contained">
+          レポートを作成する
+            </Button>
+            </Link>
+            </Box>
     <Box
     sx={{
       textAlign:"center",
     }}
     >
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar />
+      <DateCalendar  value={value} onChange={(newValue) => setValue(newValue)}/>
     </LocalizationProvider>
     </Box>
 
+    
     <Box
     sx={{
       display:'flex',
@@ -110,22 +128,34 @@ export default function BasicDateCalendar() {
 
       {filteredReports.map(e=>{
         return <div className='reports' key={e.id}>
-          <Link href={'/player/report?id='+e.id}>
-          <Card sx={{ margin:2, }}>
+          <Card sx={{ margin:4, }}>
       <CardActionArea  sx={{width:350,}}>
         <CardContent>
           <Typography gutterBottom sx={{fontSize:18,}}>
         {e.name}
           </Typography>
-
-          <Typography  sx={{fontSize:14,}}>
+          <Typography gutterBottom sx={{fontSize:18,}}>
+        {e.place}
+          </Typography>
+          <Typography gutterBottom sx={{fontSize:18,}}>
+        {e.weather}
+          </Typography>
+          <Typography gutterBottom sx={{fontSize:18,}}>
+        {e.condition}
+          </Typography>
+          <Typography  sx={{fontSize:18,}}>
           {e.goal}
           {/* 選手のレポート部分の目標を持ってきている */}
+          </Typography>
+          <Typography gutterBottom sx={{fontSize:18,}}>
+        {e.text}
+          </Typography>
+          <Typography gutterBottom sx={{fontSize:18,}}>
+        {e.comment}
           </Typography>
         </CardContent>
       </CardActionArea>
       </Card>
-      </Link>
          </div>
       })}
      </Box>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 //import styles from '@/styles/Report.module.css'
 import  React, {useState,useEffect} from 'react';
 import Box from '@mui/material/Box';
@@ -12,6 +13,7 @@ import {useSearchParams} from 'next/navigation';
 import  {firestore} from '@/utils/firebase';//自分が作成した @/=は自分作成した。
 import { doc,getDoc,updateDoc } from 'firebase/firestore';
 import { Place } from '@mui/icons-material';
+import {useRouter} from 'next/router'
 
 
 
@@ -28,7 +30,7 @@ export default function Report() {
     if(!reportId)return;
     const reportRef = doc(firestore,'reports',reportId);
   const reportSnap = await getDoc(reportRef);
-  const reportData = reportSnap.data();
+  const reportData = reportSnap.data() || {}
   setReport(reportData);
   };
 

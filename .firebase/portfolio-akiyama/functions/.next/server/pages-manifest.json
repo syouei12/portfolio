@@ -1,0 +1,17 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/api/hello": "pages/api/hello.js",
+  "/manager/accountmanagement": "pages/manager/accountmanagement.html",
+  "/": "pages/index.html",
+  "/manager/calendar": "pages/manager/calendar.html",
+  "/manager/createaccount": "pages/manager/createaccount.html",
+  "/manager/login": "pages/manager/login.html",
+  "/manager/playercreate": "pages/manager/playercreate.html",
+  "/manager/report": "pages/manager/report.html",
+  "/player/calendar": "pages/player/calendar.html",
+  "/player/login": "pages/player/login.html",
+  "/player/report": "pages/player/report.html",
+  "/_error": "pages/_error.js",
+  "/404": "pages/404.html"
+}

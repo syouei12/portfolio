@@ -1,3 +1,4 @@
+// @ts-nocheck
 //import styles from '@/styles/Report.module.css'
 import  React, {useState} from 'react';
 import Box from "@mui/material/Box";

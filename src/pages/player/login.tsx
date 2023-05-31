@@ -1,3 +1,4 @@
+// @ts-nocheck
 //import styles from '@/styles/Report.module.css'
 import  React, {useState} from 'react';
 import Box from "@mui/material/Box";
@@ -8,6 +9,7 @@ import { traceDeprecation } from "process";
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import {useRouter} from 'next/router'
 import {auth} from '@/utils/firebase'
+import { red } from '@mui/material/colors';
 
 //sxでcssをあてる
 export default function Login() {
@@ -23,7 +25,7 @@ export default function Login() {
     await signInWithEmailAndPassword (auth,email,password)
     .then(async()=>{//うまく行った場合
       alert('ログインに成功しました')
-      await router.push('/player/report')//登録後カレンダーにとぶ
+      await router.push('/player/calendar')//登録後カレンダーにとぶ
     })
     .catch((error)=>{//失敗した場合
     alert('ログイン失敗しました\nメールアドレスとパスワードを確認してください')
@@ -31,11 +33,11 @@ export default function Login() {
   }
   return (
     <>
-      <Container maxWidth="md" sx={{ p: 10 }}>
+      <Container maxWidth="md" sx={{ p: 10,bgcolor:"#DBE6E0" }}>
         <Box
-          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}
+          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 6,fontSize:30, }}
         >
-          <p >LOGIN</p>
+          <p >PLAYER</p>
         </Box>
         <Box
           sx={{

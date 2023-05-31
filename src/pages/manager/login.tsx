@@ -32,7 +32,7 @@ export default function Login() {
   }
   return (
     <>
-      <Container maxWidth="md" sx={{ p: 2,}}>
+      <Container maxWidth="md" sx={{ p: 10,bgcolor:"#DBE6E0"}}>
         <Box
           sx={{
             textAlign: "center",

@@ -1,3 +1,4 @@
+// @ts-nocheck
 //import styles from '@/styles/Report.module.css'
 import React,{use, useState,useEffect} from 'react';
 import Box from '@mui/material/Box';
@@ -100,7 +101,7 @@ export default function Report() {
      }
     await setDoc(reportDocRef,reportData)//await＝結果が出るまで待つ
     alert("送信が完了しました。")
-
+    await router.push('/player/calendar')
   }
 
 
@@ -239,7 +240,7 @@ export default function Report() {
         width:800,
       }}>
       <Button variant="outlined" size="small" sx={{mx:2}}>下書き保存</Button>
-          <Button variant="contained"  sx={{mx:2}} 
+          <Button variant="contained"  sx={{mx:2}}
            href="#outlined-buttons"
             onClick={(createPost)=>submit()
             }>

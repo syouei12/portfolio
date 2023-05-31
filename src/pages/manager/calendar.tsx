@@ -1,3 +1,4 @@
+// @ts-nocheck
 import  React, {useState,useEffect} from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -99,14 +100,14 @@ export default function DisableElevation() {
 
 
     <Button sx={{mx:3,height:45,}} variant="contained" disableElevation>
-    <Link href={'/manager/createaccount'} sx={{}}>
+    <Link href={'/manager/playercreate'} >
       <p style={{color:'white',}}>アカウント管理</p>
       </Link>
     </Button>
 
-    <Button  variant="contained" disableElevation>
+    {/* <Button  variant="contained" disableElevation>
       設定
-    </Button>
+    </Button> */}
     </Box>
 
     <Box>
