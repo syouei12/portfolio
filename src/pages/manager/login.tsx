@@ -1,3 +1,4 @@
+// @ts-nocheck
 //import styles from '@/styles/Report.module.css'
 import  React, {useState} from 'react';
 import Box from "@mui/material/Box";
@@ -7,6 +8,7 @@ import Button from "@mui/material/Button";
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import {useRouter} from 'next/router'
 import {auth} from '@/utils/firebase'
+import Image from 'next/image'
 
 
 
@@ -32,16 +34,17 @@ export default function Login() {
   }
   return (
     <>
-      <Container maxWidth="md" sx={{ p: 10,bgcolor:"#DBE6E0"}}>
+      <Container maxWidth="md" sx={{ p: 10,}}>
+      <Image src="/managerlogin.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(90%)' }} />
+
         <Box
           sx={{
             textAlign: "center",
           }}
         >
-          <Box
-          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}
-        >
-          <p >MANAGER</p>
+          <Box>
+        <p style={{ ...styles.centerText, zIndex: 1 }}>MANAGER</p>
+
         </Box>
           <TextField
             id="outlined-multiline-static"
@@ -54,15 +57,16 @@ export default function Login() {
               justifyContent: "center",
               mb: 5,
               width:400,
+              backgroundColor: '#f5f5f5'
             }}
           />
-           </Box>
-           <Box
-           sx={{
+          </Box>
+          <Box
+          sx={{
             textAlign: "center",
           }}
-           >
-           <TextField
+          >
+          <TextField
             type="password"
             id="outlined-multiline-static"
             label="パスワード"
@@ -74,9 +78,10 @@ export default function Login() {
               justifyContent: "center",
               mb: 5,
               width:400,
+              backgroundColor: '#f5f5f5'
             }}
           />
-           </Box>
+          </Box>
         <br />
         <Box
           component="form"
@@ -93,7 +98,7 @@ export default function Login() {
         sx={{ display: "flex",
         justifyContent: "center" }}
         >
-          <Button variant="contained"  href="#outlined-buttons" onClick={login}>
+          <Button variant="contained"  href="#outlined-buttons" onClick={login} sx={{p:2}}>
             ログイン
           </Button>
         </Box>
@@ -101,3 +106,15 @@ export default function Login() {
     </>
   );
 }
+
+const styles = {
+  centerText: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontSize: 40,
+    fontStyle: 'italic',
+    textShadow: '#fff 2px 0, #fff -2px 0, #fff 0 -2px, #fff 0 2px, #fff 2px 2px, #fff -2px 2px, #fff 2px -2px, #fff -2px -2px, #fff 1px 2px, #fff -1px 2px, #fff 1px -2px, #fff -1px -2px, #fff 2px 1px, #fff -2px 1px, #fff 2px -1px, #fff -2px -1px, rgba(0, 0, 0, .5) 3px 3px 3px',
+    position: 'relative',
+    zIndex: 1,
+  },
+};

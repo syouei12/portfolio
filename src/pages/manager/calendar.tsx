@@ -17,6 +17,9 @@ import Link from 'next/link';//
 import { alignProperty } from '@mui/material/styles/cssUtils';
 import {getAuth} from 'firebase/auth'
 import dayjs, { Dayjs } from 'dayjs';
+import Container from "@mui/material/Container";
+
+
 
 type Reports={
 name:string;
@@ -88,14 +91,14 @@ export default function DisableElevation() {
   },[value])
 
   return(
-    <>
+    <Container maxWidth="md" sx={{ p: 10, }}>
     <Box
     sx={{
       display:'flex',
       justifyContent:'center',
       mt:4,
       mb:8,
-      textDecoration:'none'
+      textDecoration:'none',
     }}>
 
 
@@ -148,6 +151,6 @@ export default function DisableElevation() {
     </Box>
 
 
-    </>
+    </Container>
   );
 }

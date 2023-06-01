@@ -10,6 +10,7 @@ import {signInWithEmailAndPassword} from 'firebase/auth'
 import {useRouter} from 'next/router'
 import {auth} from '@/utils/firebase'
 import { red } from '@mui/material/colors';
+import Image from 'next/image';
 
 //sxでcssをあてる
 export default function Login() {
@@ -33,11 +34,11 @@ export default function Login() {
   }
   return (
     <>
-      <Container maxWidth="md" sx={{ p: 10,bgcolor:"#DBE6E0" }}>
-        <Box
-          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 6,fontSize:30, }}
-        >
-          <p >PLAYER</p>
+      <Container maxWidth="md" sx={{ p: 10,}}>
+      <Image src="/playerlogin.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(90%)' }} />
+
+        <Box>
+                  <p style={{ ...styles.centerText, zIndex: 1 }}>PLAYER</p>
         </Box>
         <Box
           sx={{
@@ -55,6 +56,7 @@ export default function Login() {
             sx={{
               mb: 3,
               width: 400,
+              backgroundColor: '#f5f5f5',
             }}
           />
         </Box>
@@ -74,6 +76,7 @@ export default function Login() {
             }}
             sx={{
               width: 400,
+              backgroundColor: '#f5f5f5',
             }}
           />
         </Box>
@@ -96,7 +99,7 @@ export default function Login() {
             justifyContent: "center",
           }}
         >
-          <Button variant="contained" href="#outlined-buttons" onClick={login}>
+          <Button variant="contained" href="#outlined-buttons" onClick={login} sx={{p:2}}>
             ログイン
           </Button>
         </Box>
@@ -104,3 +107,14 @@ export default function Login() {
     </>
   );
 }
+const styles = {
+  centerText: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontSize: 40,
+    fontStyle: 'italic',
+    textShadow: '#fff 2px 0, #fff -2px 0, #fff 0 -2px, #fff 0 2px, #fff 2px 2px, #fff -2px 2px, #fff 2px -2px, #fff -2px -2px, #fff 1px 2px, #fff -1px 2px, #fff 1px -2px, #fff -1px -2px, #fff 2px 1px, #fff -2px 1px, #fff 2px -1px, #fff -2px -1px, rgba(0, 0, 0, .5) 3px 3px 3px',
+    position: 'relative',
+    zIndex: 1,
+  },
+};

@@ -17,6 +17,7 @@ import { alignProperty } from '@mui/material/styles/cssUtils';
 import {getAuth} from 'firebase/auth'
 import dayjs, { Dayjs } from 'dayjs';
 import Button from '@mui/material/Button';
+import Image from 'next/image'
 
 
 type Reports={
@@ -40,7 +41,7 @@ export default function BasicDateCalendar() {
   const today = new Date()//Calendarの日付部分の今を表す設定
   const [value, setValue] = React.useState<Dayjs | null>(dayjs(today));
 
-   console.log(value);
+  console.log(value);
   const auth=getAuth();
   const [uid, setUid] = useState('');
   const getUid = async()=>{
@@ -93,7 +94,10 @@ export default function BasicDateCalendar() {
 
   return (
     <>
-   <Box
+    {/* <Image src="/managerlogin.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(90%)' }} /> */}
+
+
+  <Box
     sx={{
       display:'flex',
       justifyContent:'center',
@@ -102,22 +106,28 @@ export default function BasicDateCalendar() {
       textDecoration:'none'
     }}>
       <Link href={'/player/report'} >
-      <Button variant="contained">
+      <Button variant="contained" sx={{p:2}}>
           レポートを作成する
             </Button>
             </Link>
             </Box>
     <Box
     sx={{
+      backgroundColor:'white',
       textAlign:"center",
+      padding: '20px',
+      // boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    // borderRadius: '8px',
+    // borderTop: '2px solid #333',
+    // borderBottom: '2px solid #333',
     }}
     >
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar  value={value} onChange={(newValue) => setValue(newValue)}/>
+    <LocalizationProvider dateAdapter={AdapterDayjs}  >
+      <DateCalendar  value={value} onChange={(newValue) => setValue(newValue)} sx={{width:600,color:"black"}}/>
     </LocalizationProvider>
     </Box>
 
-    
+
     <Box
     sx={{
       display:'flex',
@@ -128,8 +138,8 @@ export default function BasicDateCalendar() {
 
       {filteredReports.map(e=>{
         return <div className='reports' key={e.id}>
-          <Card sx={{ margin:4, }}>
-      <CardActionArea  sx={{width:350,}}>
+          <Card sx={{ margin:4,color:'' }}>
+      <CardActionArea  sx={{width:350,backgroundColor:'whitesmoke'}}>
         <CardContent>
           <Typography gutterBottom sx={{fontSize:18,}}>
         {e.name}
@@ -156,10 +166,10 @@ export default function BasicDateCalendar() {
         </CardContent>
       </CardActionArea>
       </Card>
-         </div>
+        </div>
       })}
-     </Box>
-
-     </>
+    </Box>
+    </>
     );
 }
+
