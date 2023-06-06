@@ -13,23 +13,21 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <main style={{ backgroundColor: '#DBE6E0', height: '100vh' }}>
-  <Image src="/home.jpg" alt="" layout="fill" objectFit="cover"  />
+    <main style={{ backgroundColor: 'white', height: '100vh' }}>
+  <Image src="/home.jpg" alt="" layout="fill" objectFit="cover" style={{backgroundColor: 'white',opacity:0.5}} />
 
       <Container maxWidth="md" sx={{ p: 4 }}>
         <div style={{ position: 'relative' }}>
-          <p style={{ ...styles.centerText, zIndex: 1 }}>野球ノート</p>
-          <Box sx={styles.buttonContainer}>
+          <p style={{ ...styles.centerText,zIndex: 1 }}>野球ノート</p>
+          <Box sx={{...styles.buttonContainer , justifyContent: 'space-between',m:9 }}>
             <Link href="/manager/login">
-              <Button variant="contained" sx={buttonStyles.button}>
+              <Button variant="contained"  sx={buttonStyles.button }>
                 指導者のログインはこちら
               </Button>
             </Link>
-          </Box>
-          <Box sx={styles.buttonContainer}>
             <Link href="/player/login">
-              <Button variant="contained" sx={buttonStyles.button}>
-                選手のログインはこちら
+              <Button variant="contained" sx={ buttonStyles.button  }>
+              指導者のログインはこちら
               </Button>
             </Link>
           </Box>
@@ -53,7 +51,6 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     mt: 10,
-    mb: 8,
   },
 };
 

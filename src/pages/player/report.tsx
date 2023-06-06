@@ -17,15 +17,18 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import {useRouter} from 'next/router'
+import Link from 'next/link'
+
+
 
 //sxでcssをあてる
 export default function Report() {
 
   const auth=getAuth();
-  const [ place,setPlace ] = useState('グランド');
+  const [ place,setPlace ] = useState('');
   const [isPlaceError,setPlaceError] = useState(false);//ここもエラー時
 
-  const [ weather,setWeather ] = useState('晴れ');
+  const [ weather,setWeather ] = useState('');
   const [isWeatherError,setWeatherError] = useState(false);//ここもエラー時
 
   const [ goal,setGoal ] = useState('');
@@ -61,10 +64,10 @@ export default function Report() {
     //   console.log(condition);
 
 
-     if(place===''){
+    if(place===''){
       alert("場所は必須入力です")
       return
-     }
+    }
       if(weather===''){
         alert("天気は必須入力です")
         return
@@ -81,24 +84,24 @@ export default function Report() {
         alert("調子は必須項目です")
         return
       }
-     const docRef=doc(collection(firestore,"players"),uid)//どのfirebaseに保存するかを決めている
-     const playerSnap = await getDoc(docRef);
-     const playerData = playerSnap.data();//Playerのfirestoreのデータ
-     const reportDocRef =doc(collection(firestore,"reports"))
+    const docRef=doc(collection(firestore,"players"),uid)//どのfirebaseに保存するかを決めている
+    const playerSnap = await getDoc(docRef);
+    const playerData = playerSnap.data();//Playerのfirestoreのデータ
+    const reportDocRef =doc(collection(firestore,"reports"))
 
     const reportData={
       name:playerData.name,
-       place:place,
-       weather:weather,
-       goal:goal,
-       condition:condition,
-       text:text,
-       comment:"",
+      place:place,
+      weather:weather,
+      goal:goal,
+      condition:condition,
+      text:text,
+      comment:"",
       playerId:uid,
       managerId:playerData.managerId,
       date:new Date().getTime(),
       id:reportDocRef.id
-     }
+    }
     await setDoc(reportDocRef,reportData)//await＝結果が出るまで待つ
     alert("送信が完了しました。")
     await router.push('/player/calendar')
@@ -239,9 +242,12 @@ export default function Report() {
         justifyContent:'center',
         width:800,
       }}>
-      <Button variant="outlined" size="small" sx={{mx:2}}>下書き保存</Button>
+      <Link href="/player/calendar">
+      <Button variant="outlined" size="small" sx={{mx:3,p:1}}>Homeに戻る</Button>
+      </Link>
           <Button variant="contained"  sx={{mx:2}}
-           href="#outlined-buttons"
+          href="#outlined-buttons"
+
             onClick={(createPost)=>submit()
             }>
             送信

@@ -9,33 +9,65 @@ import {signInWithEmailAndPassword} from 'firebase/auth'
 import {useRouter} from 'next/router'
 import {auth} from '@/utils/firebase'
 import Image from 'next/image'
-
+import Alert from '@mui/material/Alert';
+import Link from 'next/link'
+import Snackbar from '@mui/material/Snackbar';
 
 
 //sxでcssをあてる
 export default function Login() {
+  const [open, setOpen] = useState(false);
+  const [mallOpen, setMallOpen] = useState(false);
+  const [passOpen, setPassOpen] = useState(false);
   const router=useRouter()
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setPassOpen(false);
+    setMallOpen(false);
+    setOpen(false);
+  };
+
   const login =async () => {
     if(email===''){//メールアドレスが空白の場合
-    alert('メールアドレスを入力してください')
+      setMallOpen(true)
     }if(password===''){
-      alert('パスワードを入力してください')
+      setPassOpen(true)
     }//パスワードの空白の場合
     await signInWithEmailAndPassword (auth,email,password)
     .then(async()=>{//うまく行った場合
-      alert('ログインに成功しました')
+      setOpen(true)
       await router.push('/manager/calendar')//登録後カレンダーにとぶ
     })
     .catch((error)=>{//失敗した場合
-    alert('ログイン失敗しました\nメールアドレスとパスワードを確認してください')
+      alert('ログイン失敗しましたメールアドレスとパスワードを確認してください')
+    // alert('ログイン失敗しましたメールアドレスとパスワードを確認してください')
     })
   }
   return (
     <>
+    <Snackbar open={open} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          ログインに成功しました
+        </Alert>
+      </Snackbar>
+      <Snackbar open={mallOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          メールアドレスを入力してください
+        </Alert>
+      </Snackbar>
+      <Snackbar open={passOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          パスワードを入力してください
+        </Alert>
+      </Snackbar>
+
       <Container maxWidth="md" sx={{ p: 10,}}>
-      <Image src="/managerlogin.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(90%)' }} />
+      <Image src="/manager_login.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(90%)',backgroundColor: 'white',opacity:0.3 }} />
 
         <Box
           sx={{
@@ -57,7 +89,9 @@ export default function Login() {
               justifyContent: "center",
               mb: 5,
               width:400,
-              backgroundColor: '#f5f5f5'
+              backgroundColor: 'white',
+              opacity:0.7,
+              borderRadius:2
             }}
           />
           </Box>
@@ -78,7 +112,9 @@ export default function Login() {
               justifyContent: "center",
               mb: 5,
               width:400,
-              backgroundColor: '#f5f5f5'
+              backgroundColor: 'white',
+              opacity:0.7,
+              borderRadius:2,
             }}
           />
           </Box>
@@ -96,12 +132,27 @@ export default function Login() {
 
         <Box
         sx={{ display: "flex",
-        justifyContent: "center" }}
+        justifyContent: "center",
+      }}
         >
-          <Button variant="contained"  href="#outlined-buttons" onClick={login} sx={{p:2}}>
+          <Button variant="contained"  href="#outlined-buttons" onClick={login} disabled={true} sx={{p:2,borderRadius:4}}>
             ログイン
           </Button>
         </Box>
+
+        <Box
+        sx={{ display: "flex",
+        justifyContent: "center",
+        mt:6,
+      }}>
+        <Link href={'/manager/createaccount'} >
+
+          <Button variant="contained"    sx={{p:2,borderRadius:4}}>
+            新規の登録はこちら
+          </Button>
+          </Link>
+        </Box>
+
       </Container>
     </>
   );

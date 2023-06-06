@@ -142,7 +142,7 @@ export default function BasicDateCalendar() {
       <CardActionArea  sx={{width:350,backgroundColor:'whitesmoke'}}>
         <CardContent>
           <Typography gutterBottom sx={{fontSize:18,}}>
-        {e.name}
+          {e.name}
           </Typography>
           <Typography gutterBottom sx={{fontSize:18,}}>
         {e.place}

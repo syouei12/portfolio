@@ -39,7 +39,7 @@ export default function DisableElevation() {
   const today = new Date()//Calendarの日付部分の今を表す設定
   const [value, setValue] = React.useState<Dayjs | null>(dayjs(today));
 
-   console.log(value);
+  console.log(value);
   const auth=getAuth();
   const [uid, setUid] = useState('');
   const getUid = async()=>{
@@ -102,9 +102,9 @@ export default function DisableElevation() {
     }}>
 
 
-    <Button sx={{mx:3,height:45,}} variant="contained" disableElevation>
+    <Button sx={{mx:3,height:45,textDecoration:'none'}} variant="contained" disableElevation >
     <Link href={'/manager/playercreate'} >
-      <p style={{color:'white',}}>アカウント管理</p>
+      <p style={{color:'white'}}>プレイヤー作成</p>
       </Link>
     </Button>
 
@@ -116,7 +116,7 @@ export default function DisableElevation() {
     <Box>
     {/*カレンダー部分↓ */}
     <LocalizationProvider  dateAdapter={AdapterDayjs}>
-      <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
+      <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} sx={{width:600,}} />
     </LocalizationProvider>
     </Box>
 

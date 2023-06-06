@@ -68,7 +68,7 @@ export default function PlayerCreate() {
   //     email:email,
   //     name:name,
   //     id:uid
-     }//クリエイトアカウントに反映させる
+    }//クリエイトアカウントに反映させる
     //await setDoc(docRef,playerData)//await＝結果が出るまで待つ
     //登録後カレンダーにとぶ
   // })
@@ -84,7 +84,7 @@ export default function PlayerCreate() {
             textAlign: "center",
           }}
         >
-           <Box
+          <Box
           sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}
         >
           <p >PLAYERCREATE</p>
@@ -145,12 +145,19 @@ export default function PlayerCreate() {
         >
           {" "}
         </Box>
-
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button variant="contained" href="#outlined-buttons" onClick={createAccount}>
+        <Box
+      sx={{
+        display:'flex',
+        justifyContent:'center',
+        width:800,
+      }}>
+      <Link href="/manager/calendar">
+      <Button variant="outlined" size="small" sx={{mx:3,p:2}}>戻る</Button>
+      </Link>
+          <Button variant="contained" href="#outlined-buttons" onClick={createAccount} sx={{p:0.01}}>
             <p>作成</p>
           </Button>
-        </Box>
+          </Box>
 
       </Container>
     </>

@@ -29,16 +29,16 @@ export default function Login() {
       await router.push('/player/calendar')//登録後カレンダーにとぶ
     })
     .catch((error)=>{//失敗した場合
-    alert('ログイン失敗しました\nメールアドレスとパスワードを確認してください')
+    alert('ログイン失敗しましたメールアドレスとパスワードを確認してください')
     })
   }
   return (
     <>
       <Container maxWidth="md" sx={{ p: 10,}}>
-      <Image src="/playerlogin.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(90%)' }} />
+      <Image src="/player_login.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(90%)',backgroundColor: 'white',opacity:0.8 }} />
 
         <Box>
-                  <p style={{ ...styles.centerText, zIndex: 1 }}>PLAYER</p>
+          <p style={{ ...styles.centerText, zIndex: 1 }}>PLAYER</p>
         </Box>
         <Box
           sx={{
@@ -56,7 +56,9 @@ export default function Login() {
             sx={{
               mb: 3,
               width: 400,
-              backgroundColor: '#f5f5f5',
+              backgroundColor: 'white',
+              opacity:0.7,
+              borderRadius:2
             }}
           />
         </Box>
@@ -76,7 +78,9 @@ export default function Login() {
             }}
             sx={{
               width: 400,
-              backgroundColor: '#f5f5f5',
+              backgroundColor: 'white',
+              opacity:0.7,
+              borderRadius:2
             }}
           />
         </Box>
@@ -99,7 +103,7 @@ export default function Login() {
             justifyContent: "center",
           }}
         >
-          <Button variant="contained" href="#outlined-buttons" onClick={login} sx={{p:2}}>
+          <Button variant="contained" href="#outlined-buttons" onClick={login} sx={{p:2,borderRadius:4}}>
             ログイン
           </Button>
         </Box>
