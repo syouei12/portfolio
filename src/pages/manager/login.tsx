@@ -16,6 +16,7 @@ import Snackbar from '@mui/material/Snackbar';
 
 //sxでcssをあてる
 export default function Login() {
+  const [mallPassOpen,setMallPassOpen]=useState(false)
   const [open, setOpen] = useState(false);
   const [mallOpen, setMallOpen] = useState(false);
   const [passOpen, setPassOpen] = useState(false);
@@ -23,10 +24,13 @@ export default function Login() {
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
 
+// パスワードがない時は
+
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
+    setMallPassOpen(false);
     setPassOpen(false);
     setMallOpen(false);
     setOpen(false);
@@ -44,7 +48,7 @@ export default function Login() {
       await router.push('/manager/calendar')//登録後カレンダーにとぶ
     })
     .catch((error)=>{//失敗した場合
-      alert('ログイン失敗しましたメールアドレスとパスワードを確認してください')
+    setMallPassOpen(true)
     // alert('ログイン失敗しましたメールアドレスとパスワードを確認してください')
     })
   }
@@ -63,6 +67,11 @@ export default function Login() {
       <Snackbar open={passOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           パスワードを入力してください
+        </Alert>
+      </Snackbar>
+      <Snackbar open={mallPassOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        ログイン失敗しましたメールアドレスとパスワードを確認してください
         </Alert>
       </Snackbar>
 
@@ -135,7 +144,7 @@ export default function Login() {
         justifyContent: "center",
       }}
         >
-          <Button variant="contained"  href="#outlined-buttons" onClick={login} disabled={true} sx={{p:2,borderRadius:4}}>
+          <Button variant="contained"  href="#outlined-buttons" onClick={login} disabled={false} sx={{p:2,borderRadius:4}}>
             ログイン
           </Button>
         </Box>

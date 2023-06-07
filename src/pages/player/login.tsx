@@ -11,29 +11,72 @@ import {useRouter} from 'next/router'
 import {auth} from '@/utils/firebase'
 import { red } from '@mui/material/colors';
 import Image from 'next/image';
+import Alert from '@mui/material/Alert';
+import Link from 'next/link'
+import Snackbar from '@mui/material/Snackbar';
+
 
 //sxでcssをあてる
 export default function Login() {
+  const [mallPassOpen,setMallPassOpen]=useState(false);
+  const [open, setOpen] = useState(false);
+  const [mallOpen, setMallOpen] = useState(false);
+  const [passOpen, setPassOpen] = useState(false);
   const router=useRouter()
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setMallPassOpen(false);
+    setPassOpen(false);
+    setMallOpen(false);
+    setOpen(false);
+  };
+
+
+
   const login =async () => {
     if(email===''){//メールアドレスが空白の場合
-    alert('メールアドレスを入力してください')
+      setMallOpen(true)
     }if(password===''){
-      alert('パスワードを入力してください')
+      setPassOpen(true)
     }//パスワードの空白の場合
     await signInWithEmailAndPassword (auth,email,password)
     .then(async()=>{//うまく行った場合
-      alert('ログインに成功しました')
-      await router.push('/player/calendar')//登録後カレンダーにとぶ
+      setOpen(true)
+      await router.push('/manager/calendar')//登録後カレンダーにとぶ
     })
     .catch((error)=>{//失敗した場合
-    alert('ログイン失敗しましたメールアドレスとパスワードを確認してください')
+    setMallPassOpen(true)
+    // alert('ログイン失敗しましたメールアドレスとパスワードを確認してください')
     })
   }
   return (
     <>
+    <Snackbar open={open} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          ログインに成功しました
+        </Alert>
+      </Snackbar>
+      <Snackbar open={mallOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          メールアドレスを入力してください
+        </Alert>
+      </Snackbar>
+      <Snackbar open={passOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          パスワードを入力してください
+        </Alert>
+      </Snackbar>
+      <Snackbar open={mallPassOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        ログイン失敗しましたメールアドレスとパスワードを確認してください
+        </Alert>
+      </Snackbar>
+
+
       <Container maxWidth="md" sx={{ p: 10,}}>
       <Image src="/player_login.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(90%)',backgroundColor: 'white',opacity:0.8 }} />
 
