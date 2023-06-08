@@ -53,6 +53,8 @@ export default function Login() {
     // alert('ログイン失敗しましたメールアドレスとパスワードを確認してください')
     })
   }
+  const isButtonDisabled = email === '' || password === '';//メールアドレスとパスワードを入力しないとログインボタンは押せない
+
   return (
     <>
     <Snackbar open={open} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
@@ -146,7 +148,7 @@ export default function Login() {
             justifyContent: "center",
           }}
         >
-          <Button variant="contained" href="#outlined-buttons" onClick={login} sx={{p:2,borderRadius:4}}>
+          <Button variant="contained" href="#outlined-buttons"disabled={isButtonDisabled} onClick={login} sx={{p:2,borderRadius:4}}>
             ログイン
           </Button>
         </Box>
