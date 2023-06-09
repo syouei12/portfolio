@@ -49,7 +49,7 @@ export default function Login() {
   }
   useEffect(()=>{
     getPlayers()
-  },[auth])
+  },[uid])
 
   const deletePlayer=async(id)=>{
     if(!confirm('本当に削除しますか？'))return
