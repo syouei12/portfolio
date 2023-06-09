@@ -15,6 +15,7 @@ import {collection,where,getDocs,query} from 'firebase/firestore'
 import {useRouter} from 'next/router'
 import {getAuth} from 'firebase/auth'
 import { httpsCallable } from 'firebase/functions';//サーバー側の関数を呼ぶ
+import Link from 'next/link';//
 
 
 
@@ -93,6 +94,20 @@ export default function Login() {
         </Card>)
       })}
     </Box>
+
+    <Box
+      sx={{
+        display:'flex',
+        justifyContent:'center',
+        width:800,
+        mt:7,
+      }}>
+      <Link href="/manager/calendar">
+      <Button variant="outlined" size="small" sx={{mx:3,p:2}}>戻る</Button>
+      </Link>
+          </Box>
+
+
       </Container>
     </>
   );

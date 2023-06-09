@@ -46,7 +46,7 @@ export default function Login() {
     await signInWithEmailAndPassword (auth,email,password)
     .then(async()=>{//うまく行った場合
       setOpen(true)
-      await router.push('/manager/calendar')//登録後カレンダーにとぶ
+      await router.push('/player/calendar')//登録後カレンダーにとぶ
     })
     .catch((error)=>{//失敗した場合
     setMallPassOpen(true)

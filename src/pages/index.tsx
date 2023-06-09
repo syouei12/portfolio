@@ -27,7 +27,7 @@ export default function Home() {
             </Link>
             <Link href="/player/login">
               <Button variant="contained" sx={ buttonStyles.button  }>
-              指導者のログインはこちら
+              選手のログインはこちら
               </Button>
             </Link>
           </Box>
