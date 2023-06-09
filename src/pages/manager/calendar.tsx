@@ -108,6 +108,11 @@ export default function DisableElevation() {
       </Link>
     </Button>
 
+    <Button sx={{mx:3,height:45,textDecoration:'none'}} variant="contained" disableElevation >
+    <Link href={'/manager/accountmanagement'} >
+      <p style={{color:'white'}}>プレイヤー一覧</p>
+      </Link>
+    </Button>
     {/* <Button  variant="contained" disableElevation>
       設定
     </Button> */}

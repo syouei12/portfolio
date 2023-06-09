@@ -20,4 +20,14 @@ export const createPlayerAccount = functions.https.onCall(async(data: any) => {
         name:name,
         managerId: managerId,
     })
-  });//コードを追記などしたらターミナルで更新「firebase deploy --only functions 」
+});//コードを追記などしたらターミナルで更新「firebase deploy --only functions 」
+
+export const deletePlayerAccount = functions.https.onCall(async(data: any) => {
+    console.log({ data });
+    const id=data.id
+
+    await admin.auth().deleteUser(id)
+
+    const playerRef= await admin.firestore().collection('players').doc(id).get()
+    await playerRef.ref.delete()
+});

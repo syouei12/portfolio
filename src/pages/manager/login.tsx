@@ -65,17 +65,17 @@ export default function Login() {
         </Alert>
       </Snackbar>
       <Snackbar open={mallOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           メールアドレスを入力してください
         </Alert>
       </Snackbar>
       <Snackbar open={passOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           パスワードを入力してください
         </Alert>
       </Snackbar>
       <Snackbar open={mallPassOpen} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
         ログイン失敗しましたメールアドレスとパスワードを確認してください
         </Alert>
       </Snackbar>

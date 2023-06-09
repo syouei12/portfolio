@@ -30,7 +30,7 @@ export default function PlayerCreate() {
       setUid(user?.uid)
     }
   }
-  
+
   useEffect(()=>{
     getUid()
     console.log(uid)

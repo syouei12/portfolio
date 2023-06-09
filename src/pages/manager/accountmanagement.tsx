@@ -10,10 +10,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import {firestore} from '@/utils/firebase'
+import {firestore,functions} from '@/utils/firebase'
 import {collection,where,getDocs,query} from 'firebase/firestore'
 import {useRouter} from 'next/router'
 import {getAuth} from 'firebase/auth'
+import { httpsCallable } from 'firebase/functions';//サーバー側の関数を呼ぶ
+
 
 
 //sxでcssをあてる
@@ -23,7 +25,9 @@ export default function Login() {
   const getUid = async()=>{
     const user = auth.currentUser//ログインしないとコンソールでnull
     console.log(user);
+
     if(user){
+      console.log(user?.uid);
       setUid(user?.uid)
     }
   }//自分のチームのmanagerIDの部分のレポートだけ抜き取る
@@ -44,7 +48,15 @@ export default function Login() {
   }
   useEffect(()=>{
     getPlayers()
-  },[])
+  },[auth])
+
+  const deletePlayer=async(id)=>{
+    if(!confirm('本当に削除しますか？'))return
+    const callServer=httpsCallable(functions,'deletePlayerAccount');
+    await callServer({
+      id:id,
+    })
+  }
 
   return (
     <>
@@ -63,7 +75,7 @@ export default function Login() {
       listStyle:'none',
     }}>
       {players.map(e=>{
-        return(    <Card sx={{ margin:2, }}>
+        return(    <Card key={e.id} sx={{ margin:2, }}>
           <CardActionArea  sx={{width:350,}}>
             <CardContent>
               <Typography gutterBottom sx={{fontSize:18,}}>
@@ -73,8 +85,11 @@ export default function Login() {
                 {e.email}
               </Typography>
             </CardContent>
-            <Button sx={{}}>削除</Button>
           </CardActionArea>
+          <Button onClick={()=>{
+              deletePlayer(e.id)
+            }
+            } sx={{}}>削除</Button>
         </Card>)
       })}
     </Box>
