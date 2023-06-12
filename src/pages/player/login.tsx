@@ -83,7 +83,7 @@ export default function Login() {
       <Image src="/player_login.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(90%)',backgroundColor: 'white',opacity:0.8 }} />
 
         <Box>
-          <p style={{ ...styles.centerText, zIndex: 1 }}>PLAYER</p>
+          <p style={{ ...styles.centerText, zIndex: 1 }}>選手ログイン</p>
         </Box>
         <Box
           sx={{

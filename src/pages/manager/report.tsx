@@ -14,6 +14,7 @@ import  {firestore} from '@/utils/firebase';//自分が作成した @/=は自分
 import { doc,getDoc,updateDoc } from 'firebase/firestore';
 import { Place } from '@mui/icons-material';
 import {useRouter} from 'next/router'
+import Link from 'next/link';//
 
 
 
@@ -81,13 +82,32 @@ export default function Report() {
 
 
   return (
+    <>
+        <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          px: 4,
+          py: 2,
+          backgroundColor: '#333',
+          color: 'white',
+        }}
+      >
+        <Typography variant="h6">myレポート</Typography>
+        <Link href="/manager/login">
+      <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
+      </Link>
+      </Box>
+
     <Container maxWidth="md" sx={{p:4}}>
-      <Box sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}>
-      <h1>REPORT</h1>
+      <Box sx={{ textAlign: "center",mt:10, mb: 4,fontSize:20, }}>
+      <h1>レポート</h1>
       </Box>
       <Box
       sx={{
         display:'flex',
+        justifyContent:'center',
         width:800,
         mb:2
       }}
@@ -181,14 +201,18 @@ export default function Report() {
         justifyContent:'center',
         width:800,
       }}>
+          <Link href="/manager/calendar">
+      <Button variant="outlined" size="small" sx={{mx:3,p:2}}>戻る</Button>
+      </Link>
           <Button variant="contained"
-           sx={{mx:3}}
+          sx={{mx:3}}
             href="#outlined-buttons"
-           onClick={updateComment}>
+          onClick={updateComment}>
             送信
           </Button>
-
       </Box>
       </Container>
+      </>
+
   )
 }

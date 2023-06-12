@@ -11,6 +11,7 @@ import {useRouter} from 'next/router'
 import { collection,doc,setDoc, } from 'firebase/firestore';
 import { httpsCallable } from 'firebase/functions';//サーバー側の関数を呼ぶ
 import Link from 'next/link';//
+import Typography from '@mui/material/Typography';
 
 
 //sxでcssをあてる
@@ -78,6 +79,22 @@ export default function PlayerCreate() {
 
   return (
     <>
+    <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          px: 4,
+          py: 2,
+          backgroundColor: '#333',
+          color: 'white',
+        }}
+      >
+        <Typography variant="h6">myレポート</Typography>
+        <Link href="/manager/login">
+      <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
+      </Link>
+      </Box>
       <Container maxWidth="md" sx={{ p: 4 }}>
         <Box
           sx={{
@@ -85,9 +102,9 @@ export default function PlayerCreate() {
           }}
         >
           <Box
-          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}
+          sx={{ textAlign: "center", mb: 4,fontSize:30, }}
         >
-          <p >PLAYERCREATE</p>
+          <p >プレイヤーアカウント作成</p>
         </Box>
           <TextField
             id="outlined-multiline-static"
@@ -149,7 +166,6 @@ export default function PlayerCreate() {
       sx={{
         display:'flex',
         justifyContent:'center',
-        width:800,
       }}>
       <Link href="/manager/calendar">
       <Button variant="outlined" size="small" sx={{mx:3,p:2}}>戻る</Button>

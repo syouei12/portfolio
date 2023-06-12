@@ -18,6 +18,7 @@ import { alignProperty } from '@mui/material/styles/cssUtils';
 import {getAuth} from 'firebase/auth'
 import dayjs, { Dayjs } from 'dayjs';
 import Container from "@mui/material/Container";
+import Image from 'next/image'
 
 
 
@@ -91,7 +92,32 @@ export default function DisableElevation() {
   },[value])
 
   return(
+    <>
+        <Image src="/calendar.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
+
+
+    <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          px: 4,
+          py: 2,
+          backgroundColor: '#333',
+          color: 'white',
+        }}
+      >
+        <Typography variant="h6">myレポート</Typography>
+        <Link href="/manager/login">
+      <Button variant="contained"  size="small" sx={{mx:3,p:1,textDecoration:'none',color:'white'}}>
+      ログアウト
+        </Button>
+      </Link>
+      </Box>
+
     <Container maxWidth="md" sx={{ p: 10, }}>
+
+
     <Box
     sx={{
       display:'flex',
@@ -155,7 +181,7 @@ export default function DisableElevation() {
       })}
     </Box>
 
-
     </Container>
+    </>
   );
 }

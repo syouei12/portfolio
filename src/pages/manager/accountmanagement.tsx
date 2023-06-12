@@ -61,12 +61,28 @@ export default function Login() {
 
   return (
     <>
+    <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          px: 4,
+          py: 2,
+          backgroundColor: '#333',
+          color: 'white',
+        }}
+      >
+        <Typography variant="h6">myレポート</Typography>
+        <Link href="/manager/login">
+      <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
+      </Link>
+      </Box>
       <Container maxWidth="md" sx={{ p: 4 }}>
 
         <Box
-          sx={{ textAlign: "center", borderBottom: "solid 0.01px red ",mt:9, mb: 4,fontSize:30, }}
+          sx={{ textAlign: "center",mt:9, mb: 4,fontSize:30, }}
         >
-          <p>PLAYER一覧</p>
+          <p>プレイヤー一覧</p>
         </Box>
         <Box
     sx={{

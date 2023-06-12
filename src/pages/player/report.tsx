@@ -18,6 +18,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import {useRouter} from 'next/router'
 import Link from 'next/link'
+import Image from 'next/image'
 
 
 
@@ -110,10 +111,30 @@ export default function Report() {
 
 
   return (
+    <>
+    <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          px: 4,
+          py: 2,
+          backgroundColor: '#333',
+          color: 'white',
+        }}
+      >
+        <Typography variant="h6">myレポート</Typography>
+        <Link href="/player/login">
+      <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
+      </Link>
+      </Box>
+
     <Container maxWidth="md" sx={{p:4}}>
 
-      <Box sx={{ textAlign: "center", borderBottom: "solid 0.01px red ", mb: 4,fontSize:30, }}>
-        <h1>REPORT</h1>
+
+
+      <Box sx={{ textAlign: "center", mt:10, mb: 4,fontSize:20, }}>
+        <h1>レポート</h1>
       </Box>
 
       <Box
@@ -255,5 +276,6 @@ export default function Report() {
 
       </Box>
       </Container>
+      </>
   )
 }

@@ -89,7 +89,7 @@ export default function Login() {
           }}
         >
           <Box>
-        <p style={{ ...styles.centerText, zIndex: 1 }}>MANAGER</p>
+        <p style={{ ...styles.centerText, zIndex: 1 }}>指導者ログイン</p>
 
         </Box>
           <TextField
