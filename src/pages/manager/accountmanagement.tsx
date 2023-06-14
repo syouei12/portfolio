@@ -106,7 +106,7 @@ export default function Login() {
           <Button onClick={()=>{
               deletePlayer(e.id)
             }
-            } sx={{}}>削除</Button>
+            } sx={{color:'red'}}>削除</Button>
         </Card>)
       })}
     </Box>

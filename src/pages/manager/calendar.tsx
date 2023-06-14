@@ -163,7 +163,7 @@ export default function DisableElevation() {
         return <div className='reports' key={e.id}>
           <Link href={'/manager/report?id='+e.id}>
           <Card sx={{ margin:2, }}>
-      <CardActionArea  sx={{width:350,}}>
+      <CardActionArea  sx={{width:350,backgroundColor: 'whitesmoke' }}>
         <CardContent>
           <Typography gutterBottom sx={{fontSize:18,}}>
         {e.name}
