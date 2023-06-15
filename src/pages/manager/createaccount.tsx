@@ -8,6 +8,7 @@ import {auth,firestore} from '@/utils/firebase'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {useRouter} from 'next/router'
 import { collection,doc,setDoc, } from 'firebase/firestore';
+import Image from 'next/image'
 
 
 //sxでcssをあてる
@@ -22,8 +23,8 @@ export default function Login() {
       }if(password===''){
         alert('パスワードを入力してください')
       }//パスワードの空白の場合
-   await createUserWithEmailAndPassword(auth,email,password)
-   .then(async(userCredential)=>{//うまく行った場合
+  await createUserWithEmailAndPassword(auth,email,password)
+  .then(async(userCredential)=>{//うまく行った場合
     const user = userCredential.user
     console.log(user)
 
@@ -34,7 +35,7 @@ export default function Login() {
       email:email,
       name:name,
       id:uid
-     }//クリエイトアカウントに反映させる
+    }//クリエイトアカウントに反映させる
     await setDoc(docRef,playerData)
     alert('アカウントを作成しました')
     await router.push('/manager/calendar')//登録後カレンダーにとぶ
@@ -46,6 +47,8 @@ export default function Login() {
 
   return (
     <>
+    <Image src="/report.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
+
       <Container maxWidth="md" sx={{ p: 7 }}>
         <Box
           sx={{

@@ -120,7 +120,7 @@ export default function BasicDateCalendar() {
 
       <Box sx={{ backgroundColor: 'white', textAlign: 'center', padding: '20px' }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} sx={{ width: 600, color: 'black' }} />
+          <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} sx={{ width: 600, backgroundColor:'whitesmoke' }} />
         </LocalizationProvider>
       </Box>
 
@@ -133,20 +133,20 @@ export default function BasicDateCalendar() {
                   <CardContent>
                     <Typography gutterBottom sx={{ fontSize: 18 }}>{e.name}</Typography>
                     <Typography gutterBottom sx={{ fontSize: 18 }}>
-                      {e.place}
+                      {'場所：'+e.place}
                     </Typography>
                     <Typography gutterBottom sx={{ fontSize: 18 }}>
-                      {e.weather}
+                      {'天気：'+e.weather}
                     </Typography>
                     <Typography gutterBottom sx={{ fontSize: 18 }}>
-                      {e.condition}
+                      {'調子：'+e.condition}
                     </Typography>
                     <Typography sx={{ fontSize: 18 }}>{e.goal}</Typography>
                     <Typography gutterBottom sx={{ fontSize: 18 }}>
-                      {e.text}
+                      {'今日の反省点：'+e.text}
                     </Typography>
                     <Typography gutterBottom sx={{ fontSize: 18 }}>
-                      {e.comment}
+                      {'指導者からのコメント:'+e.comment}
                     </Typography>
                   </CardContent>
                 </CardActionArea>

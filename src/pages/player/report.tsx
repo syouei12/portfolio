@@ -112,6 +112,7 @@ export default function Report() {
 
   return (
     <>
+    <Image src="/report.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
     <Box
         sx={{
           display: 'flex',

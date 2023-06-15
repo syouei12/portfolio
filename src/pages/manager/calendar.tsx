@@ -93,7 +93,7 @@ export default function DisableElevation() {
 
   return(
     <>
-        <Image src="/calendar.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
+        <Image src="/calendar.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',opacity:0.2 }} />
 
 
     <Box
@@ -146,8 +146,8 @@ export default function DisableElevation() {
 
     <Box>
     {/*カレンダー部分↓ */}
-    <LocalizationProvider  dateAdapter={AdapterDayjs}>
-      <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} sx={{width:600,}} />
+    <LocalizationProvider  dateAdapter={AdapterDayjs} >
+      <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} sx={{width:600,backgroundColor:'whitesmoke'}} />
     </LocalizationProvider>
     </Box>
 
@@ -160,17 +160,17 @@ export default function DisableElevation() {
       listStyle:'none',
     }}>
       {filteredReports.map(e=>{
-        return <div className='reports' key={e.id}>
+        return <div   className='reports' key={e.id}>
           <Link href={'/manager/report?id='+e.id}>
           <Card sx={{ margin:2, }}>
-      <CardActionArea  sx={{width:350,backgroundColor: 'whitesmoke' }}>
+      <CardActionArea  sx={{width:350,backgroundColor: 'whitesmoke', }}>
         <CardContent>
           <Typography gutterBottom sx={{fontSize:18,}}>
         {e.name}
           </Typography>
 
           <Typography  sx={{fontSize:14,}}>
-          {e.goal}
+          {'目標：'+e.goal}
           {/* 選手のレポート部分の目標を持ってきている */}
           </Typography>
         </CardContent>

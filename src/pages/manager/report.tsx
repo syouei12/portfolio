@@ -15,6 +15,7 @@ import { doc,getDoc,updateDoc } from 'firebase/firestore';
 import { Place } from '@mui/icons-material';
 import {useRouter} from 'next/router'
 import Link from 'next/link';//
+import Image from 'next/image'
 
 
 
@@ -83,6 +84,8 @@ export default function Report() {
 
   return (
     <>
+        <Image src="/report.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
+
         <Box
         sx={{
           display: 'flex',

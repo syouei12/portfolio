@@ -49,7 +49,7 @@ const msg = {
         email: 'syouei1218@gmail.com',
     },
     subject: 'レポートが送信されました',
-    text: 'レポートが送信されました。確認してください。',
+    text: 'レポートが送信されました。確認してください。',//メールが届いたときの内容
 }
 
 await sgMail

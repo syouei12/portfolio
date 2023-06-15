@@ -12,6 +12,7 @@ import { collection,doc,setDoc, } from 'firebase/firestore';
 import { httpsCallable } from 'firebase/functions';//サーバー側の関数を呼ぶ
 import Link from 'next/link';//
 import Typography from '@mui/material/Typography';
+import Image from 'next/image'
 
 
 //sxでcssをあてる
@@ -79,6 +80,8 @@ export default function PlayerCreate() {
 
   return (
     <>
+    <Image src="/report.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
+
     <Box
         sx={{
           display: 'flex',
