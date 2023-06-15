@@ -1,7 +1,11 @@
 import * as functions from "firebase-functions";
  import * as admin from "firebase-admin";
+import * as sgMail from "@sendgrid/mail";
 
 admin.initializeApp();
+const sendgridApiKey=functions.config().sendgrid.apikey
+sgMail.setApiKey(sendgridApiKey)
+
 export const createPlayerAccount = functions.https.onCall(async(data: any) => {
     console.log({ data });
     const email=data.email
@@ -31,3 +35,29 @@ export const deletePlayerAccount = functions.https.onCall(async(data: any) => {
     const playerRef= await admin.firestore().collection('players').doc(id).get()
     await playerRef.ref.delete()
 });
+
+
+export const sendMallOnCreateReport = functions.firestore.document('reports/{reportId}').onCreate(async(snap,context)=>{
+console.log(snap,context);
+const reportData:any=snap.data()
+const manageracount=await admin.auth().getUser(reportData.managerId)//管理しているマネージャーを特定
+const managerEmail=manageracount.email
+const msg = {
+    to:managerEmail,
+    from: {
+        name: 'mynote',
+        email: 'syouei1218@gmail.com',
+    },
+    subject: 'レポートが送信されました',
+    text: 'レポートが送信されました。確認してください。',
+}
+
+await sgMail
+    .send(msg)
+    .then(() => {
+        console.log('Email sent')
+    })
+    .catch((error) => {
+        console.error(error)
+    })
+})
