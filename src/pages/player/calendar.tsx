@@ -15,6 +15,8 @@ import { getAuth, signOut } from 'firebase/auth';
 import dayjs, { Dayjs } from 'dayjs';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
+import Container from "@mui/material/Container";
+
 
 type Reports = {
   name: string;
@@ -90,8 +92,6 @@ export default function BasicDateCalendar() {
 
   return (
     <>
-      <Image src="/calendar.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
-
     <Box
         sx={{
           display: 'flex',
@@ -103,14 +103,20 @@ export default function BasicDateCalendar() {
           color: 'white',
         }}
       >
+
         <Typography variant="h6">myレポート</Typography>
         <Link href="/player/login">
       <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
       </Link>
       </Box>
+    <Container sx={{width:'100vw',mx:'auto',my:0,p:3,}}>
+
+<Image src="/calendar.jpg" alt="" fill={true} sizes='100%' style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2, }} />
 
 
-      <Box sx={{ mt: 9, mb: 8 ,display: 'flex', justifyContent: 'center'}}>
+
+
+      <Box sx={{  mb: 8 ,display: 'flex', justifyContent: 'center'}}>
         <Link href="/player/report">
           <Button variant="contained" sx={{ p: 2 }}>
             レポートを作成する
@@ -118,9 +124,9 @@ export default function BasicDateCalendar() {
         </Link>
       </Box>
 
-      <Box sx={{ backgroundColor: 'white', textAlign: 'center', padding: '20px' }}>
+      <Box sx={{ flexDirection: 'column', alignItems: 'center', display: 'flex', justifyContent:'center', textAlign: 'center',maxWidth:'md',mx:'auto' }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} sx={{ width: 600, backgroundColor:'whitesmoke' }} />
+          <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} sx={{  backgroundColor:'whitesmoke' }} />
         </LocalizationProvider>
       </Box>
 
@@ -155,6 +161,8 @@ export default function BasicDateCalendar() {
           );
         })}
       </Box>
+      </Container>
+
     </>
-  );
+     );
 }
