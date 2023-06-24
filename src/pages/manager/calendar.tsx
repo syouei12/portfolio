@@ -93,7 +93,7 @@ export default function DisableElevation() {
 
   return(
     <>
-        <Image src="/calendar.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',opacity:0.2 }} />
+        <Image src="/calendar.jpg" alt="" fill={true} sizes='100%' style={{ filter: 'brightness(50%)',opacity:0.2 }} />
 
 
     <Box
@@ -115,7 +115,7 @@ export default function DisableElevation() {
       </Link>
       </Box>
 
-    <Container maxWidth="md" sx={{ p: 10, }}>
+    <Container sx={{width:'100vw',mx:'auto',my:0,p:3,}}>
 
 
     <Box

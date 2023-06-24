@@ -92,6 +92,8 @@ export default function BasicDateCalendar() {
 
   return (
     <>
+    <Image src="/calendar.jpg" alt="" fill={true} sizes='100%' style={{ filter: 'brightness(50%)',opacity:0.2, }} />
+
     <Box
         sx={{
           display: 'flex',
@@ -111,7 +113,6 @@ export default function BasicDateCalendar() {
       </Box>
     <Container sx={{width:'100vw',mx:'auto',my:0,p:3,}}>
 
-<Image src="/calendar.jpg" alt="" fill={true} sizes='100%' style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2, }} />
 
 
 
@@ -135,7 +136,6 @@ export default function BasicDateCalendar() {
           return (
             <div className="reports" key={e.id}>
               <Card sx={{ margin: 4 }}>
-                <CardActionArea sx={{ width: 350, backgroundColor: 'whitesmoke' }}>
                   <CardContent>
                     <Typography gutterBottom sx={{ fontSize: 18 }}>{e.name}</Typography>
                     <Typography gutterBottom sx={{ fontSize: 18 }}>
@@ -155,7 +155,6 @@ export default function BasicDateCalendar() {
                       {'指導者からのコメント:'+e.comment}
                     </Typography>
                   </CardContent>
-                </CardActionArea>
               </Card>
             </div>
           );
