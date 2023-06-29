@@ -16,6 +16,8 @@ import dayjs, { Dayjs } from 'dayjs';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
 import Container from "@mui/material/Container";
+import LogoutButton from '@/components/LogoutButton';
+import PasswordChengeButton from '@/components/PasswordChengeButton'
 
 
 type Reports = {
@@ -107,9 +109,11 @@ export default function BasicDateCalendar() {
       >
 
         <Typography variant="h6">myレポート</Typography>
-        <Link href="/player/login">
-      <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
-      </Link>
+        <Box>
+          <PasswordChengeButton></PasswordChengeButton>
+        <LogoutButton></LogoutButton>
+
+        </Box>
       </Box>
     <Container sx={{width:'100vw',mx:'auto',my:0,p:3,}}>
 

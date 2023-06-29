@@ -16,6 +16,10 @@ import { Place } from '@mui/icons-material';
 import {useRouter} from 'next/router'
 import Link from 'next/link';//
 import Image from 'next/image'
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import LogoutButton from '@/components/LogoutButton';
+import PasswordChengeButton from '@/components/PasswordChengeButton'
 
 
 
@@ -26,6 +30,9 @@ export default function Report() {
   const searchparams = useSearchParams()
   const id = searchparams.get('id')
   console.log(id);
+
+
+  const [showAlert, setShowAlert] = useState(false);
 
   const [report,setReport] = useState({});
   const getReport =async (reportId:string) => {
@@ -74,18 +81,33 @@ export default function Report() {
   },[id]);
 
 
-  const updateComment=async ()=>{
-    const reportRef = doc(firestore,'reports',id);
-    await updateDoc(reportRef,{comment:comment})//前は名前で後ろのコメントはユーザーが入力したコメント
-    alert('送信しました')
-    location.reload()
-  }
+  // const updateComment=async ()=>{
+  //   const reportRef = doc(firestore,'reports',id);
+  //   await updateDoc(reportRef,{comment:comment})//前は名前で後ろのコメントはユーザーが入力したコメント
+  //   alert('送信しました')
+  //   location.reload()
+  // }
 
+  const handleClick = () => {
+    setShowAlert(true);
+    // その他の処理を追加する（例えば、データの送信や画面のリロードなど）
+  };
 
   return (
     <>
-        <Image src="/report.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
+<Snackbar
+  open={showAlert}
+  autoHideDuration={6000}
+  onClose={() => setShowAlert(false)}
+  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+>
+  <Alert onClose={() => setShowAlert(false)} severity="success" sx={{ width: '100%' }}>
+    送信しました
+  </Alert>
+</Snackbar>
 
+
+        <Image src="/report.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
         <Box
         sx={{
           display: 'flex',
@@ -98,9 +120,11 @@ export default function Report() {
         }}
       >
         <Typography variant="h6">myレポート</Typography>
-        <Link href="/manager/login">
-      <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
-      </Link>
+        <Box>
+          <PasswordChengeButton></PasswordChengeButton>
+        <LogoutButton></LogoutButton>
+
+        </Box>
       </Box>
 
     <Container maxWidth="md" sx={{p:4}}>
@@ -210,12 +234,12 @@ export default function Report() {
           <Button variant="contained"
           sx={{mx:3}}
             href="#outlined-buttons"
-          onClick={updateComment}>
+          onClick={handleClick}>
             送信
           </Button>
       </Box>
       </Container>
-      </>
 
+    </>
   )
-}
+  };

@@ -13,6 +13,9 @@ import { httpsCallable } from 'firebase/functions';//サーバー側の関数を
 import Link from 'next/link';//
 import Typography from '@mui/material/Typography';
 import Image from 'next/image'
+import LogoutButton from '@/components/LogoutButton';
+import PasswordChengeButton from '@/components/PasswordChengeButton'
+
 
 
 //sxでcssをあてる
@@ -94,9 +97,10 @@ export default function PlayerCreate() {
         }}
       >
         <Typography variant="h6">myレポート</Typography>
-        <Link href="/manager/login">
-      <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
-      </Link>
+        <Box>
+          <PasswordChengeButton></PasswordChengeButton>
+          <LogoutButton></LogoutButton>
+        </Box>
       </Box>
       <Container maxWidth="md" sx={{ p: 4 }}>
         <Box

@@ -17,8 +17,8 @@ import {getAuth} from 'firebase/auth'
 import { httpsCallable } from 'firebase/functions';//サーバー側の関数を呼ぶ
 import Link from 'next/link';//
 import Image from 'next/image'
-
-
+import LogoutButton from '@/components/LogoutButton';
+import PasswordChengeButton from '@/components/PasswordChengeButton'
 
 //sxでcssをあてる
 export default function Login() {
@@ -76,9 +76,11 @@ export default function Login() {
         }}
       >
         <Typography variant="h6">myレポート</Typography>
-        <Link href="/manager/login">
-      <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
-      </Link>
+        <Box>
+        <PasswordChengeButton></PasswordChengeButton>
+      <LogoutButton></LogoutButton>
+        </Box>
+        
       </Box>
       <Container maxWidth="md" sx={{ p: 4 }}>
 

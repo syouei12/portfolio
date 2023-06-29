@@ -9,6 +9,7 @@ import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {useRouter} from 'next/router'
 import { collection,doc,setDoc, } from 'firebase/firestore';
 import Image from 'next/image'
+import LogoutButton from '@/components/LogoutButton';
 
 
 //sxでcssをあてる

@@ -19,7 +19,10 @@ import { CardActionArea } from '@mui/material';
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
-
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import LogoutButton from '@/components/LogoutButton';
+import PasswordChengeButton from '@/components/PasswordChengeButton'
 
 
 //sxでcssをあてる
@@ -50,6 +53,8 @@ export default function Report() {
       setUid(user?.uid)
     }
   }
+    const [showAlert, setShowAlert] = useState(false);
+
 
   useEffect(()=>{
     getUid()
@@ -102,16 +107,23 @@ export default function Report() {
       managerId:playerData.managerId,
       date:new Date().getTime(),
       id:reportDocRef.id
-    }
-    await setDoc(reportDocRef,reportData)//await＝結果が出るまで待つ
-    alert("送信が完了しました。")
-    await router.push('/player/calendar')
-  }
+    }}
 
-
+const handleClick = () => {
+    setShowAlert(true)}
 
   return (
     <>
+    <Snackbar
+  open={showAlert}
+  autoHideDuration={6000}
+  onClose={() => setShowAlert(false)}
+  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+  <Alert onClose={() => setShowAlert(false)} severity="success" sx={{ width: '100%' }}>
+    送信しました
+  </Alert>
+</Snackbar>
+
     <Image src="/report.jpg" alt="" layout="fill" objectFit="cover" style={{ filter: 'brightness(50%)',backgroundColor: 'white',opacity:0.2 }} />
     <Box
         sx={{
@@ -125,9 +137,11 @@ export default function Report() {
         }}
       >
         <Typography variant="h6">myレポート</Typography>
-        <Link href="/player/login">
-      <Button variant="contained"  size="small" sx={{mx:3,p:1}}>ログアウト</Button>
-      </Link>
+        <Box>
+          <PasswordChengeButton></PasswordChengeButton>
+        <LogoutButton></LogoutButton>
+
+        </Box>
       </Box>
 
     <Container maxWidth="md" sx={{p:4}}>
@@ -267,14 +281,12 @@ export default function Report() {
       <Link href="/player/calendar">
       <Button variant="outlined" size="small" sx={{mx:3,p:1}}>Homeに戻る</Button>
       </Link>
-          <Button variant="contained"  sx={{mx:2}}
-          href="#outlined-buttons"
-
-            onClick={(createPost)=>submit()
-            }>
+      <Button variant="contained"
+          sx={{mx:3}}
+            href="#outlined-buttons"
+          onClick={handleClick}>
             送信
-            </Button>
-
+          </Button>
       </Box>
       </Container>
       </>

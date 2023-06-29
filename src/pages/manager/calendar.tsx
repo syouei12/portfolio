@@ -19,6 +19,8 @@ import {getAuth} from 'firebase/auth'
 import dayjs, { Dayjs } from 'dayjs';
 import Container from "@mui/material/Container";
 import Image from 'next/image'
+import LogoutButton from '@/components/LogoutButton';
+import PasswordChengeButton from '@/components/PasswordChengeButton'
 
 
 
@@ -108,11 +110,10 @@ export default function DisableElevation() {
         }}
       >
         <Typography variant="h6">myレポート</Typography>
-        <Link href="/manager/login">
-      <Button variant="contained"  size="small" sx={{mx:3,p:1,textDecoration:'none',color:'white'}}>
-      ログアウト
-        </Button>
-      </Link>
+      <Box>
+      <PasswordChengeButton></PasswordChengeButton>
+      <LogoutButton></LogoutButton>
+      </Box>
       </Box>
 
     <Container sx={{width:'100vw',mx:'auto',my:0,p:3,}}>
